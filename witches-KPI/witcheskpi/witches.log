@@ -1,0 +1,9 @@
+WARNING:py.warnings:/Library/Python/2.7/site-packages/django/db/models/fields/__init__.py:810: RuntimeWarning: DateTimeField received a naive datetime (2015-07-30 07:00:00) while time zone support is active.
+  RuntimeWarning)
+
+WARNING:py.warnings:/Library/Python/2.7/site-packages/django/db/models/fields/__init__.py:810: RuntimeWarning: DateTimeField received a naive datetime (2015-07-01 07:00:01) while time zone support is active.
+  RuntimeWarning)
+
+DEBUG:django.db.backends:WUsers.find (0.00) {'delete_flag': False, 'install_date': {'$gt': datetime.datetime(2015, 7, 1, 7, 0, 1, tzinfo=<UTC>), '$lt': datetime.datetime(2015, 7, 30, 7, 0, tzinfo=<UTC>)}}
+DEBUG:django.db.backends:WUsers.find (0.00) {'_id': ObjectId('55b1b460f368bf1d4396821f')}
+DEBUG:root:user id[69617477]

@@ -1,0 +1,125 @@
+# Requirement
+
+yum -y install httpd gcc gcc-c++ git pycairo mod_wsgi epel-release
+yum -y install python-pip python-devel blas-devel lapack-devel libffi-devel
+
+
+# Download and install Graphite
+
+cd /usr/local/src
+git clone https://github.com/graphite-project/graphite-web.git
+git clone https://github.com/graphite-project/carbon.git
+ 
+pip install -r /usr/local/src/graphite-web/requirements.txt  # might need to update cffi to 1.1.0
+ 
+cd /usr/local/src/carbon/
+python setup.py install
+ 
+cd /usr/local/src/graphite-web/
+python setup.py install
+ 
+cp /opt/graphite/conf/carbon.conf.example /opt/graphite/conf/carbon.conf
+cp /opt/graphite/conf/storage-schemas.conf.example /opt/graphite/conf/storage-schemas.conf
+cp /opt/graphite/conf/storage-aggregation.conf.example /opt/graphite/conf/storage-aggregation.conf
+cp /opt/graphite/conf/relay-rules.conf.example /opt/graphite/conf/relay-rules.conf
+cp /opt/graphite/webapp/graphite/local_settings.py.example /opt/graphite/webapp/graphite/local_settings.py
+cp /opt/graphite/conf/graphite.wsgi.example /opt/graphite/conf/graphite.wsgi
+cp /opt/graphite/examples/example-graphite-vhost.conf /etc/httpd/conf.d/graphite.conf
+ 
+cp /usr/local/src/carbon/distro/redhat/init.d/carbon-* /etc/init.d/
+chmod +x /etc/init.d/carbon-*
+
+
+
+
+# Configure Graphite
+	
+cd /opt/graphite
+#create database
+# sudo pip install django --upgrade  # might need this when not finding django
+# yum install -y svn
+# mkdir temp
+# svn checkout http://django-tagging.googlecode.com/svn/trunk/ ~/temp/
+# mv ~/temp/tagging /
+
+
+sudo PYTHONPATH=/opt/graphite/webapp/ django-admin.py syncdb --settings=graphite.settings
+#reply: "Yes" and enter
+#user: admin
+#passwd: voltage123
+ 
+#import static files
+sudo PYTHONPATH=/opt/graphite/webapp/ django-admin.py collectstatic --settings=graphite.settings
+# reply "yes"
+ 
+#set permission
+sudo chown -R apache:apache /opt/graphite/storage/
+sudo chown -R apache:apache /opt/graphite/static/
+sudo chown -R apache:apache /opt/graphite/webapp/
+
+
+
+
+
+
+# By default, the Apache package provided in CentOS is restrictive to Alias directory. Edit graphite Apache conf to allow the static directory:
+
+sudo vim /etc/httpd/conf.d/graphite.conf
+ 
+
+mv graphite.conf /etc/httpd/conf.d
+
+
+
+/opt/graphite/bin/carbon-cache.py start
+
+
+
+
+# install collectD
+# As we will compile CollectD from source we need a compiler:
+sudo yum install -y bzip2 wget
+sudo yum install -y make automake gcc gcc-c++ kernel-devel perl-devel
+
+# Next we download CollectD 5.5.0:
+cd /tmp/
+wget https://collectd.org/files/collectd-5.5.0.tar.bz2
+tar -jxf collectd-5.5.0.tar.bz2
+cd collectd-5.5.
+
+# Fedora compiler might yield warnings as error who look like this:
+error: #warning “_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE” [-Werror=cpp]
+So you have to disable warning as error first before you run ./configure
+
+export CFLAGS="-Wno-error"
+
+# Compile and install:
+sudo ./configure
+sudo make all install
+
+
+# Start CollectD on startup
+cd /etc/systemd/system/
+sudo wget https://raw.githubusercontent.com/martin-magakian/collectd-script/master/collectd.service
+sudo chmod +x collectd.service
+
+
+# Configure CollectD
+#edit the configuration file located in /opt/collectd/etc/collectd.conf. Using the write_graphite plugin, forward CollectD metrics to Graphite on port 2003:
+
+sudo vim /opt/collectd/etc/collectd.conf
+
+<Plugin "write_graphite">
+ <Node "example">
+  Host "localhost"
+  Port "2003"
+  Prefix "collectd."
+  Protocol "tcp"
+  #LogSendErrors false
+  #EscapeCharacter "_"
+  #SeparateInstances true
+  #StoreRates false
+  #AlwaysAppendDS false
+ </Node>
+</Plugin>
+

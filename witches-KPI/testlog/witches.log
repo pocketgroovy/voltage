@@ -1,0 +1,337 @@
+[14/Jul/2015 17:57:35] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[14/Jul/2015 17:59:58] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[14/Jul/2015 18:01:21] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[14/Jul/2015 18:07:23] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[14/Jul/2015 18:07:24] ERROR [witches.shop:781] list index out of range
+[14/Jul/2015 18:07:26] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[14/Jul/2015 18:15:02] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[14/Jul/2015 18:15:03] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[14/Jul/2015 18:15:04] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[14/Jul/2015 20:05:41] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[14/Jul/2015 20:05:43] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[14/Jul/2015 20:05:44] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[14/Jul/2015 20:07:15] DEBUG [witches.shop:1243] coordination must be from store and not user's custom one
+[14/Jul/2015 20:07:15] ERROR [witches.shop:1249] UserAvatarItemsInCloset matching query does not exist.
+Traceback (most recent call last):
+  File "/Users/yoshi.miyamoto/witches-server/Voltage/witches/shop.py", line 1236, in remove_coordination
+    coordinate_item_id=coordinate_item_id)
+  File "/Library/Python/2.7/site-packages/django/db/models/manager.py", line 143, in get
+    return self.get_query_set().get(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/django/db/models/query.py", line 404, in get
+    self.model._meta.object_name)
+DoesNotExist: UserAvatarItemsInCloset matching query does not exist.
+[14/Jul/2015 20:07:16] DEBUG [witches.views:84] Welcome New User!
+[14/Jul/2015 20:07:19] ERROR [witches.shop:781] "Key 'premium_id' not found in <QueryDict: {u'device_os': [u'ios'], u'verification_flag': [u'1'], u'phone_id': [u'abcdefgh'], u'quantity': [u'10'], u'receipt_data': [u'']}>"
+[14/Jul/2015 20:07:52] DEBUG [witches.shop:1243] coordination must be from store and not user's custom one
+[14/Jul/2015 20:07:52] ERROR [witches.shop:1249] UserAvatarItemsInCloset matching query does not exist.
+Traceback (most recent call last):
+  File "/Users/yoshi.miyamoto/witches-server/Voltage/witches/shop.py", line 1236, in remove_coordination
+    coordinate_item_id=coordinate_item_id)
+  File "/Library/Python/2.7/site-packages/django/db/models/manager.py", line 143, in get
+    return self.get_query_set().get(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/django/db/models/query.py", line 404, in get
+    self.model._meta.object_name)
+DoesNotExist: UserAvatarItemsInCloset matching query does not exist.
+[14/Jul/2015 20:07:53] DEBUG [witches.views:84] Welcome New User!
+[14/Jul/2015 20:07:56] ERROR [witches.shop:781] "Key 'premium_id' not found in <QueryDict: {u'device_os': [u'ios'], u'verification_flag': [u'1'], u'phone_id': [u'abcdefgh'], u'quantity': [u'10'], u'receipt_data': [u'']}>"
+[14/Jul/2015 20:07:58] DEBUG [witches.user:107] the player doesn't have characters yet
+[14/Jul/2015 20:07:59] DEBUG [witches.user:107] the player doesn't have characters yet
+[14/Jul/2015 20:08:00] DEBUG [witches.user:107] the player doesn't have characters yet
+[14/Jul/2015 20:08:01] DEBUG [witches.user:107] the player doesn't have characters yet
+[14/Jul/2015 20:08:01] DEBUG [witches.user:107] the player doesn't have characters yet
+[14/Jul/2015 20:08:02] DEBUG [witches.user:107] the player doesn't have characters yet
+[14/Jul/2015 20:08:03] DEBUG [witches.user:107] the player doesn't have characters yet
+[15/Jul/2015 01:13:27] ERROR [witches.recipes:144] get() returned more than one WUsers -- it returned 2!
+[15/Jul/2015 01:13:38] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 01:13:42] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 01:13:53] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 01:14:06] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 01:15:08] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 01:17:38] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 01:19:07] ERROR [witches.recipes:144] 'unicode' object has no attribute 'current_book_id'
+[15/Jul/2015 01:19:10] ERROR [witches.recipes:144] 'unicode' object has no attribute 'current_book_id'
+[15/Jul/2015 01:20:06] ERROR [witches.recipes:144] 'unicode' object has no attribute 'current_book_id'
+[15/Jul/2015 01:21:02] ERROR [witches.recipes:144] 'unicode' object has no attribute 'current_book_id'
+[15/Jul/2015 01:21:31] ERROR [witches.recipes:144] AutoField (default primary key) values must be strings representing an ObjectId on MongoDB (got u'' instead).
+[15/Jul/2015 01:26:50] ERROR [witches.recipes:144]  is not a valid ObjectId
+[15/Jul/2015 01:33:57] ERROR [witches.recipes:144] id must be an instance of (str, unicode, ObjectId), not <class 'witches.models.EmailTemplates'>
+[15/Jul/2015 01:35:05] ERROR [witches.recipes:144] id must be an instance of (str, unicode, ObjectId), not <class 'witches.models.EmailTemplates'>
+[15/Jul/2015 01:36:09] ERROR [witches.recipes:144] id must be an instance of (str, unicode, ObjectId), not <class 'witches.models.EmailTemplates'>
+[15/Jul/2015 01:36:41] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 01:42:16] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 01:56:12] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 01:57:16] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 01:57:54] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:12:47] ERROR [witches.recipes:144] 
+[15/Jul/2015 02:14:13] ERROR [witches.recipes:144] 
+[15/Jul/2015 02:30:29] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:29] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:30] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:30] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:33] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:35] DEBUG [witches.shop:1243] coordination must be from store and not user's custom one
+[15/Jul/2015 02:30:35] ERROR [witches.shop:1249] UserAvatarItemsInCloset matching query does not exist.
+Traceback (most recent call last):
+  File "/Users/yoshi.miyamoto/witches-server/Voltage/witches/shop.py", line 1236, in remove_coordination
+    coordinate_item_id=coordinate_item_id)
+  File "/Library/Python/2.7/site-packages/django/db/models/manager.py", line 143, in get
+    return self.get_query_set().get(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/django/db/models/query.py", line 404, in get
+    self.model._meta.object_name)
+DoesNotExist: UserAvatarItemsInCloset matching query does not exist.
+[15/Jul/2015 02:30:36] DEBUG [witches.views:84] Welcome New User!
+[15/Jul/2015 02:30:37] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:38] ERROR [witches.shop:781] "Key 'premium_id' not found in <QueryDict: {u'device_os': [u'ios'], u'verification_flag': [u'1'], u'phone_id': [u'abcdefgh'], u'quantity': [u'10'], u'receipt_data': [u'']}>"
+[15/Jul/2015 02:30:38] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:41] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:41] DEBUG [witches.user:109] the player doesn't have characters yet
+[15/Jul/2015 02:30:41] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:41] DEBUG [witches.user:109] the player doesn't have characters yet
+[15/Jul/2015 02:30:42] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:42] DEBUG [witches.user:109] the player doesn't have characters yet
+[15/Jul/2015 02:30:43] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:43] DEBUG [witches.user:109] the player doesn't have characters yet
+[15/Jul/2015 02:30:43] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:43] DEBUG [witches.user:109] the player doesn't have characters yet
+[15/Jul/2015 02:30:44] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:44] DEBUG [witches.user:109] the player doesn't have characters yet
+[15/Jul/2015 02:30:45] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:30:45] DEBUG [witches.user:109] the player doesn't have characters yet
+[15/Jul/2015 02:31:22] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:31:37] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[15/Jul/2015 02:31:37] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:31:37] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:31:37] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:31:37] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:31:38] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[15/Jul/2015 02:31:39] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[15/Jul/2015 02:31:39] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:31:39] DEBUG [witches.user:82] user has more than 2 user books!
+[15/Jul/2015 02:31:39] DEBUG [witches.user:82] user has more than 2 user books!
+[17/Jul/2015 23:53:55] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[17/Jul/2015 23:53:55] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:39:46] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 17:39:46] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:39:46] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:39:46] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:39:46] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:39:48] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 17:39:49] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 17:39:49] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:39:49] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:39:49] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:41:59] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 17:41:59] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:46:12] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:46:12] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:46:17] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:46:19] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 17:58:19] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 17:58:49] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 17:59:57] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 17:59:57] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:59:57] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:59:57] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:59:57] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 17:59:59] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:00:01] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:00:01] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:01] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:01] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:20] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:00:20] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:20] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:20] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:20] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:21] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:00:22] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:00:22] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:22] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:22] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:46] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:46] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:47] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:47] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:52] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:54] DEBUG [witches.shop:1304] coordination must be from store and not user's custom one
+[20/Jul/2015 18:00:56] DEBUG [witches.views:83] Welcome New User! your new user ID is [19642075]
+[20/Jul/2015 18:00:57] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:00:59] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:01:03] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:01:03] DEBUG [witches.user:108] the player doesn't have characters yet
+[20/Jul/2015 18:01:04] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:01:04] DEBUG [witches.user:108] the player doesn't have characters yet
+[20/Jul/2015 18:01:05] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:01:05] DEBUG [witches.user:108] the player doesn't have characters yet
+[20/Jul/2015 18:01:06] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:01:06] DEBUG [witches.user:108] the player doesn't have characters yet
+[20/Jul/2015 18:01:06] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:01:06] DEBUG [witches.user:108] the player doesn't have characters yet
+[20/Jul/2015 18:01:07] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:01:07] DEBUG [witches.user:108] the player doesn't have characters yet
+[20/Jul/2015 18:01:08] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:01:08] DEBUG [witches.user:108] the player doesn't have characters yet
+[20/Jul/2015 18:01:24] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:30:38] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:30:38] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:30:38] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:30:38] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:30:38] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:30:39] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:30:40] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:30:40] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:30:40] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:30:40] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:32:04] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:32:04] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:32:04] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:32:04] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:32:04] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:32:05] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:32:06] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:32:06] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:32:06] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:32:06] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:35:19] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:35:19] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:35:19] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:35:19] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:36:29] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:36:34] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:36:34] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:36:35] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:36:35] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:37:16] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:37:56] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[20/Jul/2015 18:37:57] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:37:57] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:37:57] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 18:38:12] DEBUG [witches.user:81] user has more than 2 user books!
+[20/Jul/2015 22:32:28] DEBUG [witches.user:81] user has more than 2 user books!
+[21/Jul/2015 18:42:12] DEBUG [witches.user:77] user has more than 2 user books!
+[21/Jul/2015 18:43:01] DEBUG [witches.user:77] user has more than 2 user books!
+[21/Jul/2015 18:43:21] DEBUG [witches.user:77] user has more than 2 user books!
+[21/Jul/2015 18:43:22] DEBUG [witches.user:77] user has more than 2 user books!
+[21/Jul/2015 18:44:54] DEBUG [witches.user:77] user has more than 2 user books!
+[21/Jul/2015 18:44:55] DEBUG [witches.user:77] user has more than 2 user books!
+[21/Jul/2015 19:14:34] DEBUG [witches.user:77] user has more than 2 user books!
+[21/Jul/2015 19:14:35] DEBUG [witches.user:77] user has more than 2 user books!
+[21/Jul/2015 19:14:49] DEBUG [witches.user:77] user has more than 2 user books!
+[21/Jul/2015 19:14:50] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:33] DEBUG [witches.utils.purchase:40] Wait time for validation call: 0:00:00
+[22/Jul/2015 18:52:33] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:33] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:33] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:33] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:44] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:44] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:45] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:45] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:49] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:52] DEBUG [witches.shop:1304] coordination must be from store and not user's custom one
+[22/Jul/2015 18:52:53] DEBUG [witches.views:83] Welcome New User! your new user ID is [22418275]
+[22/Jul/2015 18:52:54] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:56] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:59] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:52:59] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:53:00] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:53:00] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:53:01] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:53:01] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:53:02] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:53:02] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:53:02] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:53:02] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:53:03] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:53:03] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:53:04] DEBUG [witches.user:77] user has more than 2 user books!
+[22/Jul/2015 18:53:04] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:55:23] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:23] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:24] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:24] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:28] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:30] DEBUG [witches.shop:1304] coordination must be from store and not user's custom one
+[22/Jul/2015 18:55:31] DEBUG [witches.views:83] Welcome New User! your new user ID is [70721247]
+[22/Jul/2015 18:55:32] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:34] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:37] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:37] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:55:38] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:38] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:55:39] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:39] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:55:40] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:40] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:55:40] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:40] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:55:41] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:41] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:55:42] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:55:42] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 18:56:14] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 18:56:15] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:27:56] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:27:56] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:28:53] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:28:53] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:30:05] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:30:05] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:30:06] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:30:06] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:31:52] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:31:52] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:31:53] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:31:53] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:31:54] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:31:54] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:31:55] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:31:55] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:31:58] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:31:58] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:31:59] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:31:59] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:32:00] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:32:00] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:32:01] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:32:01] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:32:28] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:32:28] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:32:29] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:32:29] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:34:35] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:34:35] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:34:37] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:34:37] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:38:27] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:38:27] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:38:30] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:38:30] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:40:54] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:40:54] DEBUG [witches.user:104] the player doesn't have characters yet
+[22/Jul/2015 22:40:58] DEBUG [witches.user:77] user doesn't have a book!
+[22/Jul/2015 22:40:58] DEBUG [witches.user:104] the player doesn't have characters yet
+[23/Jul/2015 18:31:04] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 18:31:05] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 18:32:22] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 18:32:23] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 18:33:37] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 18:33:38] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 18:34:13] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 18:34:18] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 19:46:47] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 19:46:49] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 19:52:45] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 19:52:46] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 19:56:07] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 19:56:08] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 20:03:40] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 20:03:41] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 20:04:31] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 20:04:32] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 20:06:03] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 20:06:05] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 20:07:14] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 20:07:15] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 22:56:20] DEBUG [witches.user:77] user doesn't have a book!
+[23/Jul/2015 22:56:21] DEBUG [witches.user:77] user doesn't have a book!

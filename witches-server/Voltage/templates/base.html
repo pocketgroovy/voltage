@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Witches Tool{% endblock %}</title>
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+   <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+   <![endif]-->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" charset="utf-8"/>
+</head>
+<body>
+    <div id="sidebar" style="float: left; width: 200px;">
+        {% block sidebar %}
+        <ul>
+            {% if request.session.phone_id %}
+                <li>
+                    <a>Hello {{ request.session.phone_id }}</a>
+                </li>
+                <li><a href="/witches/ping/0/">ping</a></li>
+                <li><a href="/witches/master/get_all_master/0/">get_all_master</a></li>
+                <li><a href="/witches/player/get_playerstate/0/">get_playerstate*</a></li>
+                *only for testing purpose. should not be called directly
+                <li><a href="/witches/start_scene_entry/0/">start scene</a></li>
+                <li><a href="/witches/sync_resources_html/0/">sync resources</a></li>
+                <li><a href="/witches/coin/buy_with_coins/0/">buy with coins</a></li>
+                <li><a href="/witches/stone/buy_with_stones/0/">buy with stones</a></li>
+                <li><a href="/witches/coordinate/0/">save user clothing coordination</a></li>
+                <li><a href="/witches/premium/buy_inapp/0/">buy Premium Currency</a></li>
+                <li><a href="/witches/ticket/buy_tickets/0/">buy tickets</a></li>
+                <li><a href="/witches/remove_avaitems/remove_avatar_item/0/">remove avatar item</a></li>
+                <li><a href="/witches/remove_coord/remove_coordination/0/">remove coordination</a></li>
+                <li><a href="/witches/recipe/save_recipe/0/">save recipe</a></li>
+                <li><a href="/witches/mailbox/0/">open mail box</a></li>
+                <li><a href="/witches/use_potion_entry/0/">use potion</a></li>
+                <li><a href="/witches/use_stamina_entry/0/">use stamina </a></li>
+                ** Don't use this for story play's stamina. "update player story play" will take care of it
+                <li><a href="/witches/use_ingredient_entry/0/">use ingredient</a></li>
+                <li><a href="/witches/mail_badge/0/">get mail badge</a></li>
+                <li><a href="/witches/password/0/">Request Password</a></li>
+                <li><a href="/witches/restore/0/">Restore</a></li>
+                <li><a href="/witches/playerstorystate_entry/0/">Update Player Story State</a></li>
+                <li><a href="/witches/environment/0/">get environment</a></li>
+                <li><a href="/witches/howtos/0/">post howtos progress</a></li>
+                <li><a href="/witches/input_name_entry/0/">input name</a></li>
+                <li><a href="/witches/update_stamina_entry/0/">update stamina</a></li>
+                <li><a href="/witches/refill_stamina_entry/0/">refill stamina</a></li>
+                <li><a href="/witches/complete_scene_entry/0/">complete scene</a></li>
+                <li><a href="/witches/login_html/0/">login</a></li>
+                <li><a href="/witches/admintool/add_ingredients_inputs/0/">add all ingredients to user</a></li>
+                <li><a href="/witches/admintool/add_potions_inputs/0/">add all potions to user</a></li>
+                <li><a href="/witches/admintool/add_avatar_inputs/0/">add all Avatar Items to user</a></li>
+                <li><a href="/witches/story_reset_inputs/0/">story reset</a></li>
+
+                {% if not request.session.user_me %}
+                    <li><a href="{% url 'social:begin' 'facebook' %}?next=/witches/facebook_graph_login">Login with Facebook</a></li>
+                    <li><a href="/witches/logout/0/">Logout</a></li>
+                {% else %}
+                    <!--li><a href="/witches/facebook_graph_login">Facebook Graph</a></li-->
+                    <li><a href="{% url 'auth:logout' %}?next=/witches/">Logout</a></li>
+                {% endif %}
+            {% elif request.session.environment and not request.session.phone_id %}
+                <li><a href="/witches/create_user/0/">Create User</a></li>
+{#            {% else %}#}
+{#                <li><a href="/witches/login/">Log In</a></li>#}
+{#            {% endif %}#}
+            {% else %}
+                <li><a href="/witches/environment/0/">Environment</a></li>
+            {% endif %}       </ul>
+        {% endblock %}
+    </div>
+    <div id="content" style="float: right; width: 800px;">
+        {% block content %}{% endblock %}
+    </div>
+
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</body>
+</html>

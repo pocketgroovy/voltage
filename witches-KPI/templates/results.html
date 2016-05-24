@@ -1,0 +1,568 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <style>
+        .ui-datepicker-calendar {
+        display: none;
+        }
+        div.related{
+            overflow-x: auto;
+            width: 100%;
+        }
+    </style>
+    <script>
+      $(function() {
+        $("#datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: false,
+            dateFormat: 'MM/yy',
+            onClose: function (dateText, inst) {
+                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                $(this).datepicker('setDate', new Date(year, month, 1));
+            }
+        });
+        $("#datepicker1").datepicker();
+      });
+
+      $('.related').floatingScrollbar();
+    </script>
+
+    <div class="container">
+        <div class="wrapper"><!-- wrapper needed for scroll -->
+            <!-- Top Navigation -->
+            <header class="codrops-header">
+                <h1>Voltage Entertainment USA<span>K P I</span></h1>
+                {% if state %}
+                    <h2 style="color:#FF8080">{{ state }}</h2>
+                {% endif %}
+            </header>
+            <div class="main clearfix">
+                <p><button id="showMenu">Menu</button></p>
+                <br>
+                <div class="column">
+                    <label><h2 align="center">Select the range of dates and data to display:</h2></label>
+                    <br/>
+                    <br/>
+                    <div align="center">
+                        <form name="loadmaster" action="/witcheskpi/kpi/" method="post">
+                            {% csrf_token %}
+                            <select name="selected_device">
+                                {% if resultsType == 0 %}
+                                    <option value="0" selected="selected">ALL</option>
+                                    <option value="1">Apple</option>
+                                    <option value="2">Google</option>
+                                    <option value="3">Amazon</option>
+                                {% elif resultsType == 1 %}
+                                    <option value="0">ALL</option>
+                                    <option value="1" selected="selected">Apple</option>
+                                    <option value="2">Google</option>
+                                    <option value="3">Amazon</option>
+                                {% elif resultsType == 2 %}
+                                    <option value="0">ALL</option>
+                                    <option value="1">Apple</option>
+                                    <option value="2" selected="selected">Google</option>
+                                    <option value="3">Amazon</option>
+                                {% elif resultsType == 3 %}
+                                    <option value="0">ALL</option>
+                                    <option value="1">Apple</option>
+                                    <option value="2">Google</option>
+                                    <option value="3" selected="selected">Amazon</option>
+                                {% endif %}
+                            </select>
+                            &nbsp;&nbsp;&nbsp;
+                            <label>Month :</label>
+                            <input name="startDate" type="text" id="datepicker" class="input" value="{{ startDate  }}"/>
+                            &nbsp;&nbsp;&nbsp;
+                            <br>
+                            <br>
+                            <input type="submit" name="show" value="SHOW">
+                        </form>
+                    </div>
+                </div>
+                <div class="related">
+                    {% if resultsType == 1 %}
+                        <label><h2 align="center">Apple Results:</h2></label>
+                        <br/>
+                    {% elif resultsType == 2 %}
+                        <label><h2 align="center">Google Results:</h2></label>
+                        <br/>
+                    {% elif resultsType == 3 %}
+                        <label><h2 align="center">Amazon Results:</h2></label>
+                        <br/>
+                    {% elif resultsType == 0 %}
+                        <label><h2 align="center">All Results:</h2></label>
+                        <br/>
+                    {% endif %}
+                        <table border="1" cellspacing="1" cellpadding="1">
+                                <thead>
+                                    <th>Month</th>
+                                    <th>{{ response_all5.date }}</th>
+                                    <th>{{ response_all4.date }}</th>
+                                    <th>{{ response_all3.date }}</th>
+                                    <th>{{ response_all2.date }}</th>
+                                    <th>{{ response_all1.date }}</th>
+                                    <th>{{ response_all.date }}</th>
+                                </thead>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: <strong>Total Sales $</strong></td>
+                                    <td>{{ response_all5.total_sales_amount }}</td>
+                                    <td>{{ response_all4.total_sales_amount }}</td>
+                                    <td>{{ response_all3.total_sales_amount }}</td>
+                                    <td>{{ response_all2.total_sales_amount }}</td>
+                                    <td>{{ response_all1.total_sales_amount }}</td>
+                                    <td>{{ response_all.total_sales_amount }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: <strong>Total Units Sold</strong></td>
+                                    <td>{{ response_all5.total_sales_units }}</td>
+                                    <td>{{ response_all4.total_sales_units }}</td>
+                                    <td>{{ response_all3.total_sales_units }}</td>
+                                    <td>{{ response_all2.total_sales_units }}</td>
+                                    <td>{{ response_all1.total_sales_units }}</td>
+                                    <td>{{ response_all.total_sales_units }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone Quintet $4.99</td>
+                                    <td>{{ response_all5.total_sales_stone_quintet }}</td>
+                                    <td>{{ response_all4.total_sales_stone_quintet }}</td>
+                                    <td>{{ response_all3.total_sales_stone_quintet }}</td>
+                                    <td>{{ response_all2.total_sales_stone_quintet }}</td>
+                                    <td>{{ response_all1.total_sales_stone_quintet }}</td>
+                                    <td>{{ response_all.total_sales_stone_quintet }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone Quintet Units Sold</td>
+                                    <td>{{ response_all5.total_units_stone_quintet }}</td>
+                                    <td>{{ response_all4.total_units_stone_quintet }}</td>
+                                    <td>{{ response_all3.total_units_stone_quintet }}</td>
+                                    <td>{{ response_all2.total_units_stone_quintet }}</td>
+                                    <td>{{ response_all1.total_units_stone_quintet }}</td>
+                                    <td>{{ response_all.total_units_stone_quintet }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone Cache $9.99</td>
+                                    <td>{{ response_all5.total_sales_stone_cache }}</td>
+                                    <td>{{ response_all4.total_sales_stone_cache }}</td>
+                                    <td>{{ response_all3.total_sales_stone_cache }}</td>
+                                    <td>{{ response_all2.total_sales_stone_cache }}</td>
+                                    <td>{{ response_all1.total_sales_stone_cache }}</td>
+                                    <td>{{ response_all.total_sales_stone_cache }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone Cache Units Sold</td>
+                                    <td>{{ response_all5.total_units_stone_cache }}</td>
+                                    <td>{{ response_all4.total_units_stone_cache }}</td>
+                                    <td>{{ response_all3.total_units_stone_cache }}</td>
+                                    <td>{{ response_all2.total_units_stone_cache }}</td>
+                                    <td>{{ response_all1.total_units_stone_cache }}</td>
+                                    <td>{{ response_all.total_units_stone_cache }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone Assembly $19.99</td>
+                                    <td>{{ response_all5.total_sales_stone_assembly }}</td>
+                                    <td>{{ response_all4.total_sales_stone_assembly }}</td>
+                                    <td>{{ response_all3.total_sales_stone_assembly }}</td>
+                                    <td>{{ response_all2.total_sales_stone_assembly }}</td>
+                                    <td>{{ response_all1.total_sales_stone_assembly }}</td>
+                                    <td>{{ response_all.total_sales_stone_assembly }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone Assembly Units Sold</td>
+                                    <td>{{ response_all5.total_units_stone_assembly }}</td>
+                                    <td>{{ response_all4.total_units_stone_assembly }}</td>
+                                    <td>{{ response_all3.total_units_stone_assembly }}</td>
+                                    <td>{{ response_all2.total_units_stone_assembly }}</td>
+                                    <td>{{ response_all1.total_units_stone_assembly }}</td>
+                                    <td>{{ response_all.total_units_stone_assembly }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone Satchel $39.99</td>
+                                    <td>{{ response_all5.total_sales_stone_satchel }}</td>
+                                    <td>{{ response_all4.total_sales_stone_satchel }}</td>
+                                    <td>{{ response_all3.total_sales_stone_satchel }}</td>
+                                    <td>{{ response_all2.total_sales_stone_satchel }}</td>
+                                    <td>{{ response_all1.total_sales_stone_satchel }}</td>
+                                    <td>{{ response_all.total_sales_stone_satchel }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone Satchel Units Sold</td>
+                                    <td>{{ response_all5.total_units_stone_satchel }}</td>
+                                    <td>{{ response_all4.total_units_stone_satchel }}</td>
+                                    <td>{{ response_all3.total_units_stone_satchel }}</td>
+                                    <td>{{ response_all2.total_units_stone_satchel }}</td>
+                                    <td>{{ response_all1.total_units_stone_satchel }}</td>
+                                    <td>{{ response_all.total_units_stone_satchel }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone Hoard $59.99</td>
+                                    <td>{{ response_all5.total_sales_stone_hoard }}</td>
+                                    <td>{{ response_all4.total_sales_stone_hoard }}</td>
+                                    <td>{{ response_all3.total_sales_stone_hoard }}</td>
+                                    <td>{{ response_all2.total_sales_stone_hoard }}</td>
+                                    <td>{{ response_all1.total_sales_stone_hoard }}</td>
+                                    <td>{{ response_all.total_sales_stone_hoard }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone Hoard Units Sold</td>
+                                    <td>{{ response_all5.total_units_stone_hoard }}</td>
+                                    <td>{{ response_all4.total_units_stone_hoard }}</td>
+                                    <td>{{ response_all3.total_units_stone_hoard }}</td>
+                                    <td>{{ response_all2.total_units_stone_hoard }}</td>
+                                    <td>{{ response_all1.total_units_stone_hoard }}</td>
+                                    <td>{{ response_all.total_units_stone_hoard }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone Constellation $99.99</td>
+                                    <td>{{ response_all5.total_sales_stone_constel }}</td>
+                                    <td>{{ response_all4.total_sales_stone_constel }}</td>
+                                    <td>{{ response_all3.total_sales_stone_constel }}</td>
+                                    <td>{{ response_all2.total_sales_stone_constel }}</td>
+                                    <td>{{ response_all1.total_sales_stone_constel }}</td>
+                                    <td>{{ response_all.total_sales_stone_constel }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone Constellation Units Sold</td>
+                                    <td>{{ response_all5.total_units_stone_constel }}</td>
+                                    <td>{{ response_all4.total_units_stone_constel }}</td>
+                                    <td>{{ response_all3.total_units_stone_constel }}</td>
+                                    <td>{{ response_all2.total_units_stone_constel }}</td>
+                                    <td>{{ response_all1.total_units_stone_constel }}</td>
+                                    <td>{{ response_all.total_units_stone_constel }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina Potion Batch $4.99</td>
+                                    <td>{{ response_all5.total_sales_stamina_batch }}</td>
+                                    <td>{{ response_all4.total_sales_stamina_batch }}</td>
+                                    <td>{{ response_all3.total_sales_stamina_batch }}</td>
+                                    <td>{{ response_all2.total_sales_stamina_batch }}</td>
+                                    <td>{{ response_all1.total_sales_stamina_batch }}</td>
+                                    <td>{{ response_all.total_sales_stamina_batch }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina Potion Batch Units Sold</td>
+                                    <td>{{ response_all5.total_units_stamina_batch }}</td>
+                                    <td>{{ response_all4.total_units_stamina_batch }}</td>
+                                    <td>{{ response_all3.total_units_stamina_batch }}</td>
+                                    <td>{{ response_all2.total_units_stamina_batch }}</td>
+                                    <td>{{ response_all1.total_units_stamina_batch }}</td>
+                                    <td>{{ response_all.total_units_stamina_batch }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina Potion Set $9.99</td>
+                                    <td>{{ response_all5.total_sales_stamina_set }}</td>
+                                    <td>{{ response_all4.total_sales_stamina_set }}</td>
+                                    <td>{{ response_all3.total_sales_stamina_set }}</td>
+                                    <td>{{ response_all2.total_sales_stamina_set }}</td>
+                                    <td>{{ response_all1.total_sales_stamina_set }}</td>
+                                    <td>{{ response_all.total_sales_stamina_set }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina Potion Set Units Sold</td>
+                                    <td>{{ response_all5.total_units_stamina_set }}</td>
+                                    <td>{{ response_all4.total_units_stamina_set }}</td>
+                                    <td>{{ response_all3.total_units_stamina_set }}</td>
+                                    <td>{{ response_all2.total_units_stamina_set }}</td>
+                                    <td>{{ response_all1.total_units_stamina_set }}</td>
+                                    <td>{{ response_all.total_units_stamina_set }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina Potion Case $19.99</td>
+                                    <td>{{ response_all5.total_sales_stamina_case }}</td>
+                                    <td>{{ response_all4.total_sales_stamina_case }}</td>
+                                    <td>{{ response_all3.total_sales_stamina_case }}</td>
+                                    <td>{{ response_all2.total_sales_stamina_case }}</td>
+                                    <td>{{ response_all1.total_sales_stamina_case }}</td>
+                                    <td>{{ response_all.total_sales_stamina_case }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina Potion Case Units Sold</td>
+                                    <td>{{ response_all5.total_units_stamina_case }}</td>
+                                    <td>{{ response_all4.total_units_stamina_case }}</td>
+                                    <td>{{ response_all3.total_units_stamina_case }}</td>
+                                    <td>{{ response_all2.total_units_stamina_case }}</td>
+                                    <td>{{ response_all1.total_units_stamina_case }}</td>
+                                    <td>{{ response_all.total_units_stamina_case }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina Potion Hoard $49.99</td>
+                                    <td>{{ response_all5.total_sales_stamina_hoard }}</td>
+                                    <td>{{ response_all4.total_sales_stamina_hoard }}</td>
+                                    <td>{{ response_all3.total_sales_stamina_hoard }}</td>
+                                    <td>{{ response_all2.total_sales_stamina_hoard }}</td>
+                                    <td>{{ response_all1.total_sales_stamina_hoard }}</td>
+                                    <td>{{ response_all.total_sales_stamina_hoard }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina Potion Hoard Units Sold</td>
+                                    <td>{{ response_all5.total_units_stamina_hoard }}</td>
+                                    <td>{{ response_all4.total_units_stamina_hoard }}</td>
+                                    <td>{{ response_all3.total_units_stamina_hoard }}</td>
+                                    <td>{{ response_all2.total_units_stamina_hoard }}</td>
+                                    <td>{{ response_all1.total_units_stamina_hoard }}</td>
+                                    <td>{{ response_all.total_units_stamina_hoard }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: red">KPI1: <strong>Installs</strong></span></td>
+                                    <td>{{ response_all5.installed_user_number }}</td>
+                                    <td>{{ response_all4.installed_user_number }}</td>
+                                    <td>{{ response_all3.installed_user_number }}</td>
+                                    <td>{{ response_all2.installed_user_number }}</td>
+                                    <td>{{ response_all1.installed_user_number }}</td>
+                                    <td>{{ response_all.installed_user_number }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: red">KPI2: <strong>Unique Users(MAU)</strong></span></td>
+                                    <td>{{ response_all5.unique_users_number }}</td>
+                                    <td>{{ response_all4.unique_users_number }}</td>
+                                    <td>{{ response_all3.unique_users_number }}</td>
+                                    <td>{{ response_all2.unique_users_number }}</td>
+                                    <td>{{ response_all1.unique_users_number }}</td>
+                                    <td>{{ response_all.unique_users_number }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: red">KPI3: <strong>Purchase Rate %</strong></span></td>
+                                    <td>{{ response_all5.purchase_rate }}</td>
+                                    <td>{{ response_all4.purchase_rate }}</td>
+                                    <td>{{ response_all3.purchase_rate }}</td>
+                                    <td>{{ response_all2.purchase_rate }}</td>
+                                    <td>{{ response_all1.purchase_rate }}</td>
+                                    <td>{{ response_all.purchase_rate }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="margin-left: 2em"><strong>Purchased Unique Users</strong></span></td>
+                                    <td>{{ response_all5.purchase_unique_users_number }}</td>
+                                    <td>{{ response_all4.purchase_unique_users_number }}</td>
+                                    <td>{{ response_all3.purchase_unique_users_number }}</td>
+                                    <td>{{ response_all2.purchase_unique_users_number }}</td>
+                                    <td>{{ response_all1.purchase_unique_users_number }}</td>
+                                    <td>{{ response_all.purchase_unique_users_number }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: red">KPI4: <strong>ARPPU $</strong></span> </td>
+                                    <td>{{ response_all5.arppu }}</td>
+                                    <td>{{ response_all4.arppu }}</td>
+                                    <td>{{ response_all3.arppu }}</td>
+                                    <td>{{ response_all2.arppu }}</td>
+                                    <td>{{ response_all1.arppu }}</td>
+                                    <td>{{ response_all.arppu }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="margin-left: 2em"><strong>ARPU $</strong> </span></td>
+                                    <td>{{ response_all5.arpu }}</td>
+                                    <td>{{ response_all4.arpu }}</td>
+                                    <td>{{ response_all3.arpu }}</td>
+                                    <td>{{ response_all2.arpu }}</td>
+                                    <td>{{ response_all1.arpu }}</td>
+                                    <td>{{ response_all.arpu }}</td>
+                                </tr>
+                        </table>
+                        <br/>
+                            <table border="1" width="100%">
+                                <thead>
+                                    <th>Date 1</th>
+                                    {% for day in daily_results %}
+                                            <th {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.date }}</th>
+                                    {% endfor %}
+                                </thead>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: <strong>Total Sales $</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_sales_amount }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: <strong>Total Units Sold</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_sales_units }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone<br>Quintet $4.99</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_sales_stone_quintet }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone<br>Quintet Units Sold</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_units_stone_quintet }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone<br>Cache $9.99</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_sales_stone_cache }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone<br>Cache Units Sold</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_units_stone_cache }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone<br>Assembly $19.99</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_sales_stone_assembly }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone<br>Assembly Units Sold</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_units_stone_assembly }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone<br>Satchel $39.99</td>
+                                    {% for day in daily_results %}
+                                           <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_sales_stone_satchel }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone<br>Satchel Units Sold</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_units_stone_satchel }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone<br>Hoard $59.99</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_sales_stone_hoard }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone<br>Hoard Units Sold</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_units_stone_hoard }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone<br>Constellation $99.99</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_sales_stone_constel }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Starstone<br>Constellation Units Sold</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_units_stone_constel }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina<br>Potion Batch $4.99</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_sales_stamina_batch }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina<br>Potion Batch Units Sold</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_units_stamina_batch }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina<br>Potion Set $9.99</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_sales_stamina_set }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina<br>Potion Set Units Sold</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_units_stamina_set }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina<br>Potion Case $19.99</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_sales_stamina_case }}</td>
+                                    {% endfor %}
+                                </tr>                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina<br>Potion Case Units Sold</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_units_stamina_case }}</td>
+                                    {% endfor %}
+                                </tr>                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina<br>Potion Hoard $49.99</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_sales_stamina_hoard }}</td>
+                                    {% endfor %}
+                                </tr>                                <tr>
+                                    <td align="left"><span style="color: blueviolet">Sales</span>: Stamina<br>Potion Hoard Units Sold</td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.total_units_stamina_hoard }}</td>
+                                    {% endfor %}
+                                </tr>                                <tr>
+                                    <td align="left"><span style="color: red">KPI1:<strong>Installs</strong></span></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.installed_user_number }}</td>
+                                    {% endfor %}
+                                </tr>                                <tr>
+                                    <td align="left"><span style="color: red">KPI2:<strong>Unique Users(DAU)</strong></span></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.unique_users_number }}</td>
+                                    {% endfor %}
+                                </tr>                                <tr>
+                                    <td align="left"><span style="color: red">KPI3:<strong>Purchase Rate %</strong></span></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.purchase_rate }}</td>
+                                    {% endfor %}
+                                </tr>                                <tr>
+                                    <td align="left"><span style="margin-left: 2em"></span><strong>Purchased Unique Users</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.purchase_unique_users_number }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: red">KPI4:<strong>ARPPU $</strong></span></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.arppu }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="margin-left: 2em"></span><strong>ARPU $</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.arpu }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><span style="color: red">KPI5:<strong>RR Day 1 </strong></span></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.retention1 }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                <td align="left"><span style="color: red"><strong style="margin-left: 2em">RR Day 3</strong></span></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.retention2 }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                <td align="left"><span style="color: red"><strong style="margin-left: 2em">RR Day 7 </strong></span></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.retention3 }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                <td align="left"><span style="color: red" ><strong style="margin-left: 2em">RR Day 14 </strong></span></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.retention4 }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                <td align="left"><span style="color: red"><strong style="margin-left: 2em">RR Day 30</strong></span></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.retention5 }}</td>
+                                    {% endfor %}
+                                </tr>
+                                </table>
+                            <br/>
+                </div>
+            </div><!-- /main -->
+        </div><!-- wrapper -->
+    </div><!-- /container -->
+
+{% endblock %}

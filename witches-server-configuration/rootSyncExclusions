@@ -1,0 +1,12 @@
+.DS_Store
+.git
+SendServerDeployScripts.sh
+syncExclusions
+SSH_KEYREGIST.sh
+SUDOER_WITCH.sh
+django_requirements.txt
+RootSendScripts.sh
+rootSyncExclusions
+scripts/
+ServerDeploy.sh
+

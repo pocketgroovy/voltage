@@ -1,0 +1,50 @@
+{% extends 'admintool/adm_base.html' %}
+{% load staticfiles %}
+
+{% block admin_content %}
+        <div class="message">
+            <h2>{{ message }}</h2>
+        </div>
+
+        <div class="content">
+            <form name="items" action="/witches/admintool/items/" method="post">
+                {% csrf_token %}
+                <label><h2 align="center">Items</h2></label>
+                {% if not values %}
+                    <label>Item ID: </label>
+                    <input type="text" style="width: 200px;" name="item_id" value="{{ item_id }}"/>
+                    <br/><br/>
+                    <input type="submit" name="submit" value=" SEARCH ">
+                {% else %}
+                    <input type="hidden" name="item_id" value="{{ values.id }}" />
+                    <br/>
+                    <br/>
+                    <table>
+                        <tr>
+                            <td><label>Name:</label></td>
+                            <td>&nbsp;</td>
+                            <td><input type="text" style="width: 200px;" name="name" value="{{ values.name }}" /></td>
+                        </tr>
+                        <tr>
+                            <td><label>Price:</label></td>
+                            <td>&nbsp;</td>
+                            <td><input type="text" style="width: 100px;" name="price" value="{{ values.price }}" /></td>
+                        </tr>
+                        <tr>
+                            <td><label>Currency Flag:</label></td>
+                            <td>&nbsp;</td>
+                            <td><input type="text" style="width: 100px;" name="currency_flag" value="{{ values.currency_flag }}" /></td>
+                        </tr>
+                        <tr>
+                            <td><label>Delete Flag:</label></td>
+                            <td>&nbsp;</td>
+                            <td><input type="text" style="width: 100px;" name="delete_flag" value="{{ values.delete_flag }}" /></td>
+                        </tr>
+                    </table>
+                    <br/><br/>
+                    <input type="submit" name="submit" value=" SAVE! ">
+                {% endif %}
+            </form>
+        </div>
+
+{% endblock %}

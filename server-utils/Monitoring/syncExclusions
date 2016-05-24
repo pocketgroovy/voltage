@@ -1,0 +1,7 @@
+.DS_Store
+.git
+SendMonitoringScripts.sh
+syncExclusions
+DeployCollectD.sh
+CollectD
+

@@ -1,0 +1,616 @@
+{% extends 'base.html' %}
+{% load app_filters %}
+{% load staticfiles %}
+{% block title %} Witches Tool!! {% endblock %}
+
+{% block content %}
+{% if option %}
+    {% if option == 'environment' and item_form == 'environment' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST" xmlns="http://www.w3.org/1999/html">
+            {% csrf_token %}
+            <label for="build">Build</label>
+            <input id="build" type="text" name="build" value=""/>
+            <label for="device">Device</label>
+            <input id="device" type="text" name="device" value=""/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'create_user' and not item_form %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST" xmlns="http://www.w3.org/1999/html">
+            {% csrf_token %}
+        </form>
+    {% elif option == 'wuser_phone_id' and not item_form %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST" xmlns="http://www.w3.org/1999/html">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'item'%}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="item_list">Item List</label>
+            <input id="item_list" type="text" name="item_list" value=""/>
+            <br/>
+            <label for="quantity">Quantity</label>
+            <input id="quantity" type="text" name="quantity" value=""/>
+
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'start_scene'%}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="scene_path">Scene Path</label>
+            <input id="scene_path" type="text" name="scene_path" value=""/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'sync_resources'%}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="stamina">Stamina</label>
+            <input id="stamina" type="text" name="stamina" value=""/>
+            <br/>
+            <label for="focus">Focus</label>
+            <input id="focus" type="text" name="focus" value=""/>
+            <br/>
+            <label for="stamina_potions">Stamina Potions</label>
+            <input id="stamina_potions" type="text" name="stamina_potions" value=""/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'login' and item_form == 'login'%}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="GET">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="device">device</label>
+            <input id="device" type="text" name="device" value=""/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'input_names'%}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="first_name">First Name</label>
+            <input id="first_name" type="text" name="first_name" value=""/>
+            <br/>
+            <label for="last_name">Last Name</label>
+            <input id="last_name" type="text" name="last_name" value=""/>
+            <br/>
+
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'coins' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="item_type">Item Type</label>
+            <input id="item_type" type="text" name="item_type" value=""/>
+            0:inventory  1:avatar  2:clothing coordination
+            <br/>
+            <label for="item_id">Item ID</label>
+            <input id="item_id" type="text" name="item_id" value=""/>
+            <br/>
+            <br/>
+            <label for="quantity">Quantity</label>
+            <input id="quantity" type="text" name="quantity" value=""/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'stones' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="item_type">Item Type</label>
+            <input id="item_type" type="text" name="item_type" value=""/>
+            0:inventory  1:avatar  2:clothing coordination 3:closet
+            <br/>
+            <label for="item_id">Item ID</label>
+            <input id="item_id" type="text" name="item_id" value=""/>
+            <br/>
+            <br/>
+            <label for="quantity">Quantity</label>
+            <input id="quantity" type="text" name="quantity" value=""/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'premium' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="premium_id">premium_id</label>
+            <input id="premium_id" type="text" name="premium_id" value=""/>
+            <label for="device_os">Device Shop</label>
+            <input id="device_os" type="text" name="device_os" value=""/> (ios, amazon)
+            <br/>
+            <label for="receipt">receipt</label>
+            <input id="receipt" type="text" name="receipt" value="ewoJInNpZ25hdHVyZSIgPSAiQW5TR0t0WDZiQUhVOGdBcEI3L2NsMWoyQ3NVM2t2VUUyTWl1MVIzaUVtMXE5MUZzeDJxTUdPaS9ka3M1UVZDVWZvdHBsaXFlRWl2ejZVWUREc3VKR3RjTmdsQWluZk9JTHNNZ2kwNGZWQmU3V1hLS3VBSWVGck1FQ1dYWGRYemVUWkR3ZmZVamo4OERYSGxPT0V4YTV5OE5yT1NBUUZmVUtCdERqYVlNWmd2Q0FBQURWekNDQTFNd2dnSTdvQU1DQVFJQ0NCdXA0K1BBaG0vTE1BMEdDU3FHU0liM0RRRUJCUVVBTUg4eEN6QUpCZ05WQkFZVEFsVlRNUk13RVFZRFZRUUtEQXBCY0hCc1pTQkpibU11TVNZd0pBWURWUVFMREIxQmNIQnNaU0JEWlhKMGFXWnBZMkYwYVc5dUlFRjFkR2h2Y21sMGVURXpNREVHQTFVRUF3d3FRWEJ3YkdVZ2FWUjFibVZ6SUZOMGIzSmxJRU5sY25ScFptbGpZWFJwYjI0Z1FYVjBhRzl5YVhSNU1CNFhEVEUwTURZd056QXdNREl5TVZvWERURTJNRFV4T0RFNE16RXpNRm93WkRFak1DRUdBMVVFQXd3YVVIVnlZMmhoYzJWU1pXTmxhWEIwUTJWeWRHbG1hV05oZEdVeEd6QVpCZ05WQkFzTUVrRndjR3hsSUdsVWRXNWxjeUJUZEc5eVpURVRNQkVHQTFVRUNnd0tRWEJ3YkdVZ1NXNWpMakVMTUFrR0ExVUVCaE1DVlZNd2daOHdEUVlKS29aSWh2Y05BUUVCQlFBRGdZMEFNSUdKQW9HQkFNbVRFdUxnamltTHdSSnh5MW9FZjBlc1VORFZFSWU2d0Rzbm5hbDE0aE5CdDF2MTk1WDZuOTNZTzdnaTNvclBTdXg5RDU1NFNrTXArU2F5Zzg0bFRjMzYyVXRtWUxwV25iMzRucXlHeDlLQlZUeTVPR1Y0bGpFMU93QytvVG5STStRTFJDbWVOeE1iUFpoUzQ3VCtlWnRERWhWQjl1c2szK0pNMkNvZ2Z3bzdBZ01CQUFHamNqQndNQjBHQTFVZERnUVdCQlNKYUVlTnVxOURmNlpmTjY4RmUrSTJ1MjJzc0RBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZEl3UVlNQmFBRkRZZDZPS2RndElCR0xVeWF3N1hRd3VSV0VNNk1BNEdBMVVkRHdFQi93UUVBd0lIZ0RBUUJnb3Foa2lHOTJOa0JnVUJCQUlGQURBTkJna3Foa2lHOXcwQkFRVUZBQU9DQVFFQWVhSlYyVTUxcnhmY3FBQWU1QzIvZkVXOEtVbDRpTzRsTXV0YTdONlh6UDFwWkl6MU5ra0N0SUl3ZXlOajVVUllISytIalJLU1U5UkxndU5sMG5rZnhxT2JpTWNrd1J1ZEtTcTY5Tkluclp5Q0Q2NlI0Szc3bmI5bE1UQUJTU1lsc0t0OG9OdGxoZ1IvMWtqU1NSUWNIa3RzRGNTaVFHS01ka1NscDRBeVhmN3ZuSFBCZTR5Q3dZVjJQcFNOMDRrYm9pSjNwQmx4c0d3Vi9abEwyNk0ydWVZSEtZQ3VYaGRxRnd4VmdtNTJoM29lSk9PdC92WTRFY1FxN2VxSG02bTAzWjliN1BSellNMktHWEhEbU9Nazd2RHBlTVZsTERQU0dZejErVTNzRHhKemViU3BiYUptVDdpbXpVS2ZnZ0VZN3h4ZjRjemZIMHlqNXdOelNHVE92UT09IjsKCSJwdXJjaGFzZS1pbmZvIiA9ICJld29KSW05eWFXZHBibUZzTFhCMWNtTm9ZWE5sTFdSaGRHVXRjSE4wSWlBOUlDSXlNREUwTFRBM0xUSXlJREUyT2pFMU9qTXlJRUZ0WlhKcFkyRXZURzl6WDBGdVoyVnNaWE1pT3dvSkluVnVhWEYxWlMxcFpHVnVkR2xtYVdWeUlpQTlJQ0l3TkRka1pETTJNalJrWWpobVlUVTVNREUyWkRnNE56VTRPV0UzTURJd1lqUXdObUV6Wm1RNUlqc0tDU0p2Y21sbmFXNWhiQzEwY21GdWMyRmpkR2x2YmkxcFpDSWdQU0FpTVRBd01EQXdNREV4TnpZMk5qa3lNU0k3Q2draVluWnljeUlnUFNBaU1TNHdJanNLQ1NKMGNtRnVjMkZqZEdsdmJpMXBaQ0lnUFNBaU1UQXdNREF3TURFeU5ETTRPVFV6TVNJN0Nna2ljWFZoYm5ScGRIa2lJRDBnSWpFaU93b0pJbTl5YVdkcGJtRnNMWEIxY21Ob1lYTmxMV1JoZEdVdGJYTWlJRDBnSWpFME1EWXdOekE1TXpJd01EQWlPd29KSW5WdWFYRjFaUzEyWlc1a2IzSXRhV1JsYm5ScFptbGxjaUlnUFNBaU1VTTJPRFEyUkVVdE9VUkdOUzAwTURRMUxVRkVRekV0TmpsR1JVUTNOVVkxUVRReElqc0tDU0p3Y205a2RXTjBMV2xrSWlBOUlDSnpjSGw2WDJWdGJXVjBkRjlsTURFd01TSTdDZ2tpYVhSbGJTMXBaQ0lnUFNBaU9EWTNPREU1TXpBNUlqc0tDU0ppYVdRaUlEMGdJbU52YlM1MmIyeDBZV2RsTG1WdWRDNXpjSGw2TG1WdUlqc0tDU0p3ZFhKamFHRnpaUzFrWVhSbExXMXpJaUE5SUNJeE5ERXhNRGMwTnpjeU1EQXdJanNLQ1NKd2RYSmphR0Z6WlMxa1lYUmxJaUE5SUNJeU1ERTBMVEE1TFRFNElESXhPakV5T2pVeUlFVjBZeTlIVFZRaU93b0pJbkIxY21Ob1lYTmxMV1JoZEdVdGNITjBJaUE5SUNJeU1ERTBMVEE1TFRFNElERTBPakV5T2pVeUlFRnRaWEpwWTJFdlRHOXpYMEZ1WjJWc1pYTWlPd29KSW05eWFXZHBibUZzTFhCMWNtTm9ZWE5sTFdSaGRHVWlJRDBnSWpJd01UUXRNRGN0TWpJZ01qTTZNVFU2TXpJZ1JYUmpMMGROVkNJN0NuMD0iOwoJImVudmlyb25tZW50IiA9ICJTYW5kYm94IjsKCSJwb2QiID0gIjEwMCI7Cgkic2lnbmluZy1zdGF0dXMiID0gIjAiOwp9"/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'tickets' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <label for="ticket_type">Ticket Type</label>
+            <input id="ticket_type" type="text" name="ticket_type" value=""/>
+            0:stamina 1:focus
+            <input type="submit" value="Buy"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'save_coordination_list' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="item1">item1</label>
+            <input id="item1" type="text" name="item1" value=""/>
+            <br/>
+            <label for="item2">item2</label>
+            <input id="item2" type="text" name="item2" value=""/>
+            <br/>
+            <label for="item3">item3</label>
+            <input id="item3" type="text" name="item3" value=""/>
+            <br/>
+            <label for="item4">item4</label>
+            <input id="item4" type="text" name="item4" value=""/>
+            <br/>
+            <label for="item5">item5</label>
+            <input id="item5" type="text" name="item5" value=""/>
+            <br/>
+            <label for="item6">item6</label>
+            <input id="item6" type="text" name="item6" value=""/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'save_coordination' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            {%  if json_obj %}
+                <label for="coordination_list">avatar items in json format</label>
+                <input id = "coordination_list" type="hidden" name="coordination_list" value="{{ json_obj }}"/>
+            {% endif %}
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'remove_avatar_item' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="avatar_item_id">Avatar Item To Remove</label>
+            <input id="avatar_item_id" type="text" name="avatar_item_id" value=""/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'remove_item' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="item_id">Item To Remove</label>
+            <input id="item_id" type="text" name="item_id" value=""/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'remove_coordination' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="coordinate_item_id">Coordination To Remove</label>
+            <input id="coordinate_item_id" type="text" name="coordinate_item_id" value=""/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'remove_confirm' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <label for="avatar_item_id">Avatar Item To Remove</label>
+            <input id="avatar_item_id" type="text" name="avatar_item_id" value="{{ avatar_item_id }}"/>
+            <br/>
+            <label for="message">items in Coordination. Remove?</label>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'save_recipe' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <label for="recipe_id">Recipe ID (recipe_id)</label>
+            <input id="recipe_id" type="text" name="recipe_id" value="{{ recipe_id }}"/>
+            <br/>
+            <label for="potion_id">Potion ID (potion_id)</label>
+            <input id="potion_id" type="text" name="potion_id" value="{{ potion_id }}"/>
+            <br/>
+            <label for="stars">Stars (stars)</label>
+            <input id="stars" type="text" name="stars" value="{{ stars }}"/>
+            &nbsp 0-no stars, 1-one star, 2-two stars, 3-three stars
+            <br/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'open_mail' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            <label for="mail_item">Mails to pick up</label><br/>
+            {% for mail in all_mail_ids %}
+                  Mail {{forloop.counter}}<input type="submit" name="mail_id" value="{{mail|get_item:'id'}}" /><br/>
+            {% endfor %}
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'use_potion' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            <label for="use_potion">Enter Potion ID to use</label><br/>
+            <input id="potion_id" type="text" name="potion_id" value="{{ potion_id }}"/>
+            <br/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'howtos_progress' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id"/>
+            <br/>
+            <br/>
+            <label for="howtos_progress">HowTos Progress Path</label><br/>
+            <input id="howtos_progress" type="text" name="howtos_progress"/>
+            <br/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'prep_ingredient' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            <label for="prep_ingredient">Enter Ingredient ID 1 to use</label><br/>
+            <input id="ingredient1" type="text" name="ingredient1" />
+            <br/>
+            <br/>
+            <label for="prep_ingredient">Enter Ingredient ID 2 to use</label><br/>
+            <input id="ingredient2" type="text" name="ingredient2" />
+            <br/>
+            <br/>
+            <label for="prep_ingredient">Enter Ingredient ID 3 to use</label><br/>
+            <input id="ingredient3" type="text" name="ingredient3" />
+            <br/>
+            <br/>
+            <label for="prep_ingredient">Enter Ingredient ID 4 to use</label><br/>
+            <input id="ingredient4" type="text" name="ingredient4" />
+            <br/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'use_ingredient' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            {% if json_obj %}
+                <label for="ingredients">Ingredients in json format</label>
+                <input id = "ingredients" type="hidden" name="ingredients" value="{{ json_obj }}"/>
+            {% endif %}
+            <br/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'playerstorystate_affinities' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            <label for="affinity1">affinity1</label>
+            <input id="affinity1" type="text" name="affinity1" value=""/>
+            <br/>
+            <br/>
+            <label for="affinity2">affinity2</label>
+            <input id="affinity2" type="text" name="affinity2" value=""/>
+            <br/>
+            <br/>
+            <label for="affinity3">affinity3</label>
+            <input id="affinity3" type="text" name="affinity3" value=""/>
+            <br/>
+            <br/>
+            <label for="char_init1">char_init1</label>
+            <input id="char_init1" type="text" name="char_init1" value=""/>
+            <br/>
+            <br/>
+            <label for="char_init2">char_init2</label>
+            <input id="char_init2" type="text" name="char_init2" value=""/>
+            <br/>
+            <br/>
+            <label for="char_init3">char_init3</label>
+            <input id="char_init3" type="text" name="char_init3" value=""/>
+            <br/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+            {% elif option == 'wuser_phone_id' and item_form == 'playerstorystate_choices' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            {%  if json_obj %}
+                <label for="affinities">affinities in json format</label>
+                <input id = "affinities" type="hidden" name="affinities" value="{{ json_obj }}"/>
+            {% endif %}
+            <br/>
+            <br/>
+            <label for="selection_id1">selection_id1</label>
+            <input id="selection_id1" type="text" name="selection_id1" value=""/>
+            <br/>
+            <br/>
+            <label for="selection_id2">selection_id2</label>
+            <input id="selection_id2" type="text" name="selection_id2" value=""/>
+            <br/>
+            <br/>
+            <label for="selection_id3">selection_id3</label>
+            <input id="selection_id3" type="text" name="selection_id3" value=""/>
+            <br/>
+            <br/>
+            <label for="choice1">choice1</label>
+            <input id="choice1" type="text" name="choice1" value=""/>
+            <br/>
+            <br/>
+            <label for="choice2">choice2</label>
+            <input id="choice2" type="text" name="choice2" value=""/>
+            <br/>
+            <br/>
+            <label for="choice3">choice3</label>
+            <input id="choice3" type="text" name="choice3" value=""/>
+            <br/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'update_playerstorystate' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            {%  if json_aff %}
+                <label for="affinities">affinities in json format</label>
+                <input id = "affinities" type="hidden" name="affinities" value="{{ json_aff }}"/>
+            {% endif %}
+            <br/>
+            <br/>
+            {%  if json_choice %}
+                <label for="choices">choices in json format</label>
+                <input id = "choices" type="hidden" name="choices" value="{{ json_choice }}"/>
+            {% endif %}
+            <br/>
+            <label for="scene_id">scene_id</label>
+            <input id="scene_id" type="text" name="scene_id" value=""/>
+            <br/>
+            <br/>
+            <label for="node_id">node_ID</label>
+            <input id="node_id" type="text" name="node_id" value=""/>
+            <br/>
+            <br/>
+            <label for="stamina_potions">Stamina Potions</label>
+            <input id="stamina_potions" type="text" name="stamina_potions" value=""/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+         {% elif option == 'wuser_phone_id' and item_form == 'complete_scene_affinities' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            <label for="affinity1">affinity1</label>
+            <input id="affinity1" type="text" name="affinity1" value=""/>
+            <br/>
+            <br/>
+            <label for="affinity2">affinity2</label>
+            <input id="affinity2" type="text" name="affinity2" value=""/>
+            <br/>
+            <br/>
+            <label for="affinity3">affinity3</label>
+            <input id="affinity3" type="text" name="affinity3" value=""/>
+            <br/>
+            <br/>
+            <label for="char_init1">char_init1</label>
+            <input id="char_init1" type="text" name="char_init1" value=""/>
+            <br/>
+            <br/>
+            <label for="char_init2">char_init2</label>
+            <input id="char_init2" type="text" name="char_init2" value=""/>
+            <br/>
+            <br/>
+            <label for="char_init3">char_init3</label>
+            <input id="char_init3" type="text" name="char_init3" value=""/>
+            <br/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+            {% elif option == 'wuser_phone_id' and item_form == 'complete_scene_choices' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            {%  if json_obj %}
+                <label for="affinities">affinities in json format</label>
+                <input id = "affinities" type="hidden" name="affinities" value="{{ json_obj }}"/>
+            {% endif %}
+            <br/>
+            <br/>
+            <label for="selection_id1">selection_id1</label>
+            <input id="selection_id1" type="text" name="selection_id1" value=""/>
+            <br/>
+            <br/>
+            <label for="selection_id2">selection_id2</label>
+            <input id="selection_id2" type="text" name="selection_id2" value=""/>
+            <br/>
+            <br/>
+            <label for="selection_id3">selection_id3</label>
+            <input id="selection_id3" type="text" name="selection_id3" value=""/>
+            <br/>
+            <br/>
+            <label for="choice1">choice1</label>
+            <input id="choice1" type="text" name="choice1" value=""/>
+            <br/>
+            <br/>
+            <label for="choice2">choice2</label>
+            <input id="choice2" type="text" name="choice2" value=""/>
+            <br/>
+            <br/>
+            <label for="choice3">choice3</label>
+            <input id="choice3" type="text" name="choice3" value=""/>
+            <br/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'complete_scene' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            {%  if json_aff %}
+                <label for="affinities">affinities in json format</label>
+                <input id = "affinities" type="hidden" name="affinities" value="{{ json_aff }}"/>
+            {% endif %}
+            <br/>
+            <br/>
+            {%  if json_choice %}
+                <label for="choices">choices in json format</label>
+                <input id = "choices" type="hidden" name="choices" value="{{ json_choice }}"/>
+            {% endif %}
+            <br/>
+            <br/>
+            <label for="stamina_potions">Stamina Potions</label>
+            <input id="stamina_potions" type="text" name="stamina_potions" value=""/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'QA' and item_form == 'add_all_ingredients' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'QA' and item_form == 'add_all_potions' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'QA' and item_form == 'add_all_avatars' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <br/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'mail_pickup' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+            <label for="phone_id">User ID (phone_id)</label>
+            <input id="phone_id" type="text" name="phone_id" value="{{ phone_id }}"/>
+            <input id="mail_id" type="hidden" name="mail_id" value="{{ mail_content.id }}"/>
+            <br/>
+            <br/>
+            <label for="mail_content">Mail Content</label><br/>
+                <br/>
+                <label for="title">Title: {{ mail_content.title}}</label><br/>
+                <label for="message_body">Message: {{ mail_content.message_body }}</label><br/>
+{#                <label for="sender">Sender: {{ mail_content.sender_id }}</label><br/>#}
+{#                IMAGE <input type="submit" name="chapter_image"alt="No Image" value="{{mail_content.chapter_image}}"/><br/> {# for chapter image #}
+{#                {% for gift in mail_content.gifts %}#}
+{#                    <input type="submit" name="gifts" value="{{ gift.id }}"/><br/>#}
+{#                {% endfor %}#}
+{#                 premium :  <input type="submit" name="premium" value="{{mail_content.premium_currency}}"/><br/>#}
+{#                 free  :  <input type="submit" name="free" value="{{mail_content.free_currency}}"/><br/>#}
+        </form>
+    {% elif option == 'wuser_phone_id' and item_form == 'restore' %}
+        <form action="/witches/{{ action }}/{{ type_res }}" method="POST">
+            {% csrf_token %}
+{#            <input type = "hidden" id="new_id" type="text" name="new_id" value="{{ phone_id }}"/>#}
+            <label for="phone_id">User ID</label>
+            <input id="phone_id" type="text" name="phone_id" value=""/>
+            <br/>
+            <label for="password">Password</label>
+            <input id="password" type="text" name="password" value=""/>
+            <br/>
+            <input type="submit" value="OK"/>
+        </form>
+    {% endif %}
+{% endif %}
+
+
+<div>
+{% if function %}
+    <h2>{{ function }}</h2>
+    {% if Error %}
+        {{ Error | safe }}
+    {% elif res_obj %}
+            {{ res_obj | linebreaksbr }}
+    {% endif %}
+{% endif %}
+</div>
+{% endblock %}
+
+

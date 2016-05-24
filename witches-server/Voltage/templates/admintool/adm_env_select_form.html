@@ -1,0 +1,51 @@
+
+{% block environment_select %}
+
+<h1>
+
+    <form id="envDropdown" name="envDropdown">
+        <select class="envSelection">     
+            <option value="Dev">Development</option>        
+            <option value="Staging">Staging</option>
+            <option value="Prod">Production</option>
+        </select>
+    </form>
+
+
+    <script type="text/javascript">
+        // http://stackoverflow.com/questions/23905358/how-to-use-localstorage-on-last-html-select-value
+        // to have selected dropdown persist across pages   
+        var select = document.querySelector(".envSelection");   // document.getElementById("envSelection"); 
+
+        var selectOption = select.options[select.selectedIndex];
+        var lastSelected = localStorage.getItem('select');      // var env = localStorage ? localStorage.getItem('env') : null;
+
+        if(lastSelected) {
+            select.value = lastSelected; 
+        }
+
+        select.onchange = function () { 
+           lastSelected = select.options[select.selectedIndex].value;
+           console.log("admin environment: " + lastSelected);
+           localStorage.setItem('select', lastSelected);
+        }
+
+        // wrapping form submit and appending selected environment
+        $("#{{submit_form}}").submit(function(e) {
+            // e.preventDefault();
+            // e.returnValue = false;
+            $('<input />')
+                .attr('type', 'hidden')
+                .attr('name', "env")
+                .attr('value', lastSelected)
+                .appendTo('#{{submit_form}}');
+
+            return true;
+        });
+
+    </script>
+
+</h1>
+
+
+{% endblock %}

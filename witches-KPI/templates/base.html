@@ -1,0 +1,36 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Voltage Entertainment USA (Witches KPI)</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'css/menu.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'css/component.css' %}" />
+		<script src="{% static 'js/modernizr.custom.25376.js' %}"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+	</head>
+	<body>
+		<div id="perspective" class="perspective effect-laydown">
+
+            {% block content %}{% endblock %}
+
+			<nav class="outer-nav left vertical">
+				<a href="/witcheskpi/" class="icon-home">Home</a>
+				<a href="/witcheskpi/kpi" class="icon-image">KPI</a>
+			</nav>
+		</div><!-- /perspective -->
+
+		<script src="{% static 'js/classie.js' %}"></script>
+		<script src="{% static 'js/menu.js' %}"></script>
+		<script src="{% static 'js/jquery.ba-floatingscrollbar.js' %}"></script>
+
+	</body>
+</html>
+
