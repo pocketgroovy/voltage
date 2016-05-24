@@ -1,0 +1,173 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1343\cocoasubrtf160
+{\fonttbl\f0\fnil\fcharset128 Osaka;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
+\f3\froman\fcharset0 Times-Roman;\f4\fmodern\fcharset0 Courier;\f5\fmodern\fcharset0 Courier-Bold;
+\f6\fnil\fcharset0 HelveticaNeue;\f7\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red20\green153\blue2;\red169\green183\blue198;\red64\green51\blue43;
+\red43\green43\blue43;\red165\green194\blue97;\red204\green120\blue50;\red128\green128\blue128;}
+\margl1440\margr1440\vieww14280\viewh19520\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 REPO\
+git@172.16.100.204:witches-server\
+\
+\
+\
+Tools >open Terminal\'81\'63\
+\
+$python manage.py syncdb\
+\
+you might get this error\
+DatabaseError: AutoField (default primary key) values must be strings representing an ObjectId on MongoDB (got u'1' instead). Please make sure your SITE_ID contains a valid ObjectId string.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1 \cf0 python manage.py shell\
+\
+from django.contrib.sites.models import Site\
+s = Site()\
+s.save()\
+\
+python ./manage.py tellsiteid\
+\
+\
+license\
+\
+784089-25102014\
+000018jNDjxU4iNt"YjAfOS9jxFyf0\
+NL"QlSimaJu0L2SdiiZi9WNto6rO5A\
+mbi1pkt!aFTk2CO4dvtKafSyLugbTN\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\b \cf0 Import Error
+\b0 \
+In Preferences\
++ project structure\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f2\fs20 \cf2 \cb0 \CocoaLigature0 /Users/yoshi.miyamoto/witches-server/Voltage/Voltage\
+\cf0 \cb1 \
++Django project root:\
+/Users/yoshi.miyamoto/witches-server/Voltage/Voltage\
++Settings:\
+settings.py\
++Manage script\
+/Users/yoshi.miyamoto/witches-server/Voltage/manage.py\
+\
+ERROR\
+\pard\pardeftab720
+
+\f3\b\fs24 \cf0 \expnd0\expndtw0\kerning0
+\CocoaLigature1 MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs for details about the error. Resque\
+\
+\pard\pardeftab720
+
+\f4\b0 \cf0 \expnd0\expndtw0\kerning0
+$ redis-cli\
+> config set stop-writes-on-bgsave-error no\
+\
+\
+
+\f5\b\fs26 AttributeError: 'module' object has no attribute 'atomic'\
+
+\f4\b0\fs24 solution>\
+use 
+\f6 \expnd0\expndtw0\kerning0
+ django_facebook-6.0.1-py2.7.egg-info\
+
+\f4 \expnd0\expndtw0\kerning0
+pip install https://pypi.python.org/packages/source/d/django-facebook/django-facebook-6.0.1.tar.gz\
+\
+
+\f5\b\fs26 Could not import settings \'91\'85\'92(Is it on sys.path?): No module named \'85\
+\pard\pardeftab720
+
+\f4\b0 \cf0 \expnd0\expndtw0\kerning0
+erase .idea folder and make sure settings are correct\
+\
+Settings >\
+	Edit Run/Debug Configurations\
+		Environment variables: PYTHONUNBUFFERED=1; DJANGO_SETTINGS_MODULE=Voltage.settings\
+		Python interpreter: Python 2.7.6\
+	checks Add content roots to PYTHONPATH and source roots to PYTHONPATH\
+
+\f3\b\fs48 \expnd0\expndtw0\kerning0
+	
+\b0\fs26 No working directory needed to enter
+\b \
+\pard\pardeftab720\sa321
+
+\b0 \cf0 \
+	Python\
+		Script: /Users/yoshi.miyamoto/witches-server/Voltage/Voltage/settings.py\
+		Environment variables: 
+\f4 \expnd0\expndtw0\kerning0
+ PYTHONUNBUFFERED=1\
+		Python interpreter Python 2.7.6\
+		Working directory: /Users/yoshi.miyamoto/witches-server/Voltage/Voltage
+\f3 \expnd0\expndtw0\kerning0
+\
+Under Preferences > check Enable Django Support > Django project root : /Users/yoshi.miyahttp://qiita.com/hisaboh/items/4bbac99658a33cc8fa2a\
+\
+http://peterhudec.github.io/authomatic/examples/django-simple.html\
+\
+name:\
+yoshi\
+\
+p/w:\
+embarcadero1!\
+\
+for unit test\
+\
+Test: choose Script\
+Script: \{directory to the test python class\}\
+Django Sever\
+Environment variables: DJANGO_SETTINGS_MODULE=Voltage.settings  PYTHONUNBUFFERED=1\
+Python interpreter Python 2.7.6\
+\
+moto/witches-server\
+			> Settings > Voltage/settings.py\
+			Manage script: manage.py\
+			No environment variables needed to enter\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs24 \cf0 \kerning1\expnd0\expndtw0 {{\NeXTGraphic Screen Shot 2015-06-26 at 4.25.47 PM.png \width19140 \height10160
+}¬}
+\f3\fs26 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sa321
+\cf0 \
+\
+
+\b UNITTEST
+\b0 \
+Test: choose Script\
+Script: \{directory to the test python class\}\
+/Users/yoshi.miyamoto/witches-server/Voltage/witches/tests.py\
+\
+Environment variables: DJANGO_SETTINGS_MODULE=Voltage.settings\
+Python Interpreter: Project Default Python 2.7.6\
+Working directory: /Users/yoshi.miyamoto/witches-server/Voltage/witches\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs24 \cf0 \kerning1\expnd0\expndtw0 {{\NeXTGraphic Screen Shot 2015-06-26 at 4.25.23 PM.png \width19100 \height9360
+}¬}
+\f3\fs26 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sa321
+\cf0 \
+django.core.cache.backends.base.InvalidCacheBackendError: Could not find backend 'redis_cache.RedisCache': 'module' object has no attribute 'RedisCache'\
+\'93cause\'94  	-redis_cache.RedisCache is missing this library is using reds.sock which is occasionally missing so we switched to django_redis.cache.RedisCache which is using IP address and more like actual environment\
+if  in the file  /usr/local/etc/redis.conf,  unixsocket /tmp/redis.sock are non-comment-out\
+/tmp/redis.sock will be created  and use 2nd settings below for cache settings in PyCharm\
+otherwise uncomment in the conf file and bind 127.0.0.1 and port 6379 and use 1st setting below \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f7\fs24 \cf3 \cb4 \kerning1\expnd0\expndtw0 CACHES\cb5  = \{\uc0\u8232    \cf6 'default'\cf3 : \{\uc0\u8232        \cf6 'BACKEND'\cf3 : \cf6 'django_redis.cache.RedisCache'\cf7 ,\uc0\u8232        \cf6 'LOCATION'\cf3 : \cf6 'redis://127.0.0.1:6379/1'\cf7 ,\uc0\u8232        \cf6 'OPTIONS'\cf3 : \{\uc0\u8232            \cf6 'CLIENT_CLASS'\cf3 : \cf6 'django_redis.client.DefaultClient'\cf7 ,\uc0\u8232        \cf3 \}\uc0\u8232    \}\u8232 \}\u8232 \u8232 \cf8 # CACHES = \{\uc0\u8232 #     'default': \{\u8232 #         'BACKEND': 'redis_cache.RedisCache',\u8232 #         'LOCATION': '/tmp/redis.sock'\u8232 #     \}\u8232 # \}\
+\pard\pardeftab720\sa321
+
+\f3\fs26 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\
+\
+}

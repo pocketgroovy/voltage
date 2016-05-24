@@ -1,0 +1,41 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Witches Administration Tool</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" charset="utf-8"/>
+        <script type="text/javascript" src="{% static 'js/jquery-1.3.2.js' %}"></script>
+        <script type="text/javascript">
+            $(function() {
+                $('#navigation a').stop().animate({'marginLeft':'-85px'},1000);
+
+                $('#navigation > li').hover(
+                    function () {
+                        $('a',$(this)).stop().animate({'marginLeft':'-2px'},200);
+                    },
+                    function () {
+                        $('a',$(this)).stop().animate({'marginLeft':'-85px'},200);
+                    }
+                );
+            });
+        </script>
+    </head>
+    <body>
+        <ul id="navigation">
+            <li class="home"><a href="/witches/admintool" title="Home"></a></li>
+            <li class="download"><a href="/witches/admintool/admintooldownloadmaster" title="download"></a></li>
+            <li class="load"><a href="/witches/admintool/admintoolloadmaster" title="Load"></a></li>
+            <li class="fetch"><a href="/witches/admintool/admintoolfetchjson" title="Fetch"></a></li>
+            <li class="support"><a href="/witches/admintool/admintooluploadjson" title="Upload JSON"></a></li>
+        </ul>
+
+    {% block admin_content %} {% endblock %}
+
+    </body>
+        <div class="info">
+            <a class="back" href="http://www.codrops.com"></a>
+            <a href="http://dryicons.com">Icons by DryIcons.com</a>
+        </div>
+</html>

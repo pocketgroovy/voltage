@@ -1,0 +1,19 @@
+{% extends 'admintool/adm_base.html' %}
+{% load staticfiles %}
+
+{% block admin_content %}
+
+        <div class="message">
+            <h2>{{ message }}</h2>
+        </div>
+
+        <form id='fetch_form' name='fetch_form' action="/witches/admintool/admintoolfetchjson/" method="post">
+            {% csrf_token %}
+            <label for="phone_id">phone id: </label>
+            <input id="phone_id" type="text" name="phone_id">
+            <input type="submit" value="OK">
+        </form>
+
+        {% include "admintool/adm_env_select_form.html" with submit_form='fetch_form' %}
+
+{% endblock %}

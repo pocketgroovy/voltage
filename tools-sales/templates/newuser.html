@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+        {% if user.is_authenticated %}
+			<div class="container">
+				<div class="wrapper"><!-- wrapper needed for scroll -->
+					<!-- Top Navigation -->
+					<header class="codrops-header">
+						<h1>Voltage Entertainment USA<span>New User</span></h1>
+                        {% if state %}
+                            <h2>{{ state }}</h2>
+                        {% endif %}
+					</header>
+					<div class="main clearfix">
+						<p><button id="showMenu">Menu</button></p>
+                        <br>
+						<div class="column">
+                            <form name="login" action="/sales/register/" method="post">
+                                {% csrf_token %}
+                                <p><label>Username:</label>
+                                <input type="text" name="username" value="{{ username }}"/></p>
+                                <p><label>Password:</label>
+                                <input type="password" name="password" value=""/></p>
+                                <p><label>Confirm Password:</label>
+                                <input type="password" name="conf_password" value=""/></p>
+                                <p><label>Last Name:</label>
+                                <input type="text" name="last_name" value="{{ last_name }}"/></p>
+                                <p><label>First Name:</label>
+                                <input type="text" name="first_name" value="{{ first_name }}"/></p>
+                                <p><label>E-mail:</label>
+                                <input type="text" name="email" value="{{ email }}"/></p>
+                                <p><button type="submit" name="submit" value="Sumbit">Submit</button></p>
+                            </form>
+						</div>
+						<div class="related">
+						</div>
+					</div><!-- /main -->
+				</div><!-- wrapper -->
+			</div><!-- /container -->
+        {% else %}
+            <meta http-equiv="refresh" content="0; url=/sales/home/" />
+        {% endif %}
+{% endblock %}

@@ -1,0 +1,411 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1343\cocoasubrtf160
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset128 Osaka;\f2\fnil\fcharset0 AndaleMono;
+\f3\fmodern\fcharset0 Courier;\f4\fnil\fcharset128 HiraKakuProN-W3;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue255;\red0\green255\blue22;\red134\green205\blue77;
+\red193\green101\blue28;\red180\green36\blue25;\red200\green20\blue201;\red46\green174\blue187;}
+\margl1440\margr1440\vieww22600\viewh24020\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f0\fs24 \cf0 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\b \cf0 Softlayer
+\b0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f1 \cf0 MySQL\
+user: gambit_user\
+p/w: 913gambit\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f0 \cf0 your SoftLayer username is:\
+\
+yoshi.miyamoto\
+\
+Zaq1@wsx\
+\
+p/w: Ch@n9#M#N0w\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+{\field{\*\fldinst{HYPERLINK "https://control.softlayer.com/"}}{\fldrslt \cf2 \ul \ulc2 https://control.softlayer.com/}}
+\f1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+VPN\
+System Preferences\
+VPN Typer : PPTP\
+\
+http://www.softlayer.com/data-centers\
+\
+Server Address: pptpvpn.tor01.softlayer.com\
+\
+Encryption: Maximum\
+\
+VPN access from Safari or Firefox\
+http://www.softlayer.com/VPN-Access
+\f0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 https://vpn.tor01.softlayer.com/prx/000/http/localhost/login\
+\
+Array Networks SSL VPN\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+{\field{\*\fldinst{HYPERLINK "http://speedtest.dal05.softlayer.com/array/ArrayNetworksL3VPN_MAC.zip"}}{\fldrslt \cf2 \ul \ulc2 http://speedtest.dal05.softlayer.com/array/ArrayNetworksL3VPN_MAC.zip}}\
+\
+gambit-en-db-01 ( 10.114.239.111 )  \
+root / LrY3CUb2\
+\
+mysql\
+gambit_user / 913gambit\
+\
+gambit-en-app-01 ( 10.114.239.109 ) Public 158.85.102.213\
+root / UN67JmgY\
+\
+/var/www/gambit\
+\
+tail -f /etc/httpd/logs/error_log\
+\
+\
+test01 ( 10.114. 239.107 )   Public 158.85.102.212\
+root / G5N2nqxK\
+\
+\
+\
+WITCH VIRTUAL SERVER(staging)\
+\pard\pardeftab720
+\cf0 \expnd0\expndtw0\kerning0
+curses-en-stg (10.114.239.117) Public 158.85.102.220\
+root /\'a0BApg5tL4\
+\
+\
+*to check service and run level\
+sysv-rc-conf\
+*to start service\
+sysv-rc-conf service-name\
+\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \kerning1\expnd0\expndtw0 SOFTLAYER DASHBOARD\
+Devices > Select server > Configuration > System > OS Reload  \
+> Select > Ubuntu Linux 14.04 LTS Trusty Tahr - Minimal Install (64 bit) \
+\pard\pardeftab720
+\cf0 \expnd0\expndtw0\kerning0
+\
+\
+LOAD BALANCER\
+control.softlayer.com\
+\
+Network -> Load Balancing -> Local\
+\
+click 158.85.117.65\
+\
+Actions -> Delete Services  * only remove from load balancer. the server is still on\
+\
+ServiceGroup -> Add Service\
+\
+158.85.102.213\
+or\
+158.85.102.214\
+\
+Port 80\
+\
+Health Check Type Default\
+\
+Weight 1\
+\
+Enabled  Yes\
+\
+\
+UBUNTU DB\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f2 \cf3 \cb0 \kerning1\expnd0\expndtw0 \CocoaLigature0 /var/lib/mongodb/
+\f0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\pardeftab720
+\cf0 \expnd0\expndtw0\kerning0
+\
+\
+install WEB SERVER\
+\
+1)\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural
+
+\f2 \cf3 \cb0 \kerning1\expnd0\expndtw0 \CocoaLigature0 apt-get install python-pip
+\f0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\pardeftab720
+\cf0 \expnd0\expndtw0\kerning0
+\
+2) install Django_nonrel, toolbox, engine\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f2 \cf3 \cb0 \kerning1\expnd0\expndtw0 \CocoaLigature0 apt-get install git\
+
+\f0 \cf0 \cb1 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\pardeftab720
+\cf0 \expnd0\expndtw0\kerning0
+(http://django-mongodb-engine.readthedocs.org/en/latest/topics/setup.html)\
+Django_nonrel\
+\pard\pardeftab720
+
+\f3 \cf0 \expnd0\expndtw0\kerning0
+pip install git+https://github.com/django-nonrel/django@nonrel-1.5\
+\pard\pardeftab720
+
+\f0 \cf0 \expnd0\expndtw0\kerning0
+toolbox
+\f3 \expnd0\expndtw0\kerning0
+\
+pip install git+https://github.com/django-nonrel/djangotoolbox\
+
+\f0 \expnd0\expndtw0\kerning0
+engine
+\f3 \expnd0\expndtw0\kerning0
+\
+pip install git+https://github.com/django-nonrel/mongodb-engine\
+
+\f0 \expnd0\expndtw0\kerning0
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720
+\cf0 \expnd0\expndtw0\kerning0
+3)
+\f2 \cf1 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 all the libraries version must be matched with razerkatana \
+inside \cf3 \cb0 /usr/local/lib/python2.7/dist-packages#\cf0 \cb1 \
+\
+to specify the version number, use ==\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf3 \cb0 pip install pymongo==2.8\cf0 \cb1 \
+\
+pip install authomatic==0.0.10\cf1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 pip install debug_toolbar\
+pip install django_debug_toolbar\
+pip install django_facebook\
+pip install django_mongodb_engine\
+pip install django_redis\cf1 \
+\cf0 pip install django_redis_cache\
+pip install facebook\
+pip install oauth2client\
+pip install oauthlib\
+pip install python_social_auth\
+pip install pytz\
+pip install simplejson\
+pip install xlrd\
+pip install xlwt\
+\
+\
+*install apache\
+\pard\pardeftab720
+
+\f3 \cf4 \cb0 \expnd0\expndtw0\kerning0
+\CocoaLigature1 apt-get install apache2\
+\pard\pardeftab720
+\cf0 \cb1 \expnd0\expndtw0\kerning0
+* place conf file in\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f2 \cf3 \cb0 \kerning1\expnd0\expndtw0 \CocoaLigature0 /etc/apache2/sites-available\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \cb1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf3 \cb0 wicthes.conf\
+\
+WSGIScriptAlias / /var/www/voltage-ent.com/witches-server/Voltage/Voltage/wsgi.py\
+WSGIPythonPath /var/www/voltage-ent.com/witches-server/Voltage/\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf5 <Directory\cf6  /var/www/voltage-ent.com/witches-server/Voltage/Voltage\cf5 >\cf3 \
+    \cf5 <Files\cf6  wsgi.py\cf5 >\cf3 \
+\cf7         Order \cf6 deny\cf7 ,\cf6 allow\cf3 \
+        \cf8 Require\cf3  \cf6 all\cf3  granted\
+    \cf5 </Files>\cf3 \
+\cf5 </Directory>\cf3 \
+\
+\cf8 Alias\cf3  /media/ /var/www/voltage-ent.com/witches-server/Voltage/media/\
+\cf8 Alias\cf3  /static/ /var/www/voltage-ent.com/witches-server/Voltage/static/\
+\
+\cf5 <Directory\cf6  /var/www/voltage-ent.com/witches-server/Voltage/static\cf5 >\cf3 \
+    \cf8 Require\cf3  \cf6 all\cf3  granted\
+\cf5 </Directory>\cf3 \
+\
+\cf5 <Directory\cf6  /var/www/voltage-ent.com/witches-server/Voltage/media\cf5 >\cf3 \
+    \cf8 Require\cf3  \cf6 all\cf3  granted\
+\cf5 </Directory>\cf3 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \cb1 \
+\pard\pardeftab720
+
+\f3 \cf0 \expnd0\expndtw0\kerning0
+\CocoaLigature1 * create soft symlink to the conf file in \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f2 \cf3 \cb0 \kerning1\expnd0\expndtw0 \CocoaLigature0 /etc/apache2/sites-enabled\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \cb1 \
+* install wsgi\
+\pard\pardeftab720
+
+\f3 \cf4 \cb0 \expnd0\expndtw0\kerning0
+\CocoaLigature1 aptitude install libapache2-mod-wsgi\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f2 \cf0 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+\
+* create voltage-ent.com directory in /var/www/\
+* inside the settings.py\
+  HOST should be private IP address of database and PORT should be without \'91\'92\
+* also CACHES\
+	LOCATION should be \'91redis://10.114.239.117:6379/1'\
+\
+*change log under LOGGING     witches-server/Voltage/log -> witches-server/log \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf3 \cb0     \cf6 'handlers'\cf3 : \{\
+        \cf6 'mail_admins'\cf3 : \{\
+            \cf6 'level'\cf3 : \cf6 'ERROR'\cf3 ,\
+            \cf6 'filters'\cf3 : [],\
+            \cf6 'class'\cf3 : \cf6 'django.utils.log.AdminEmailHandler'\cf3 \
+        \},\
+        \cf6 'file'\cf3 : \{\
+            \cf6 'level'\cf3 : \cf6 'DEBUG'\cf3 ,\
+            \cf6 'class'\cf3 : \cf6 'logging.FileHandler'\cf3 ,\
+            \cf6 'filename'\cf3 : \cf6 '/var/www/voltage-ent.com/witches-server/log/witches.log'\cf3 ,\
+            \cf6 'formatter'\cf3 : \cf6 'verbose'\cf3 \
+        \},\
+    \},\cf0 \cb1 \
+\
+*move witches.log in witches-server to /witches-server/log/\
+\
+\
+PRODUCTION SERVER\
+DEBUG=False\
+ALLOWED_HOSTS = ['.my-romance.com']\
+TEMPLATE_DIRS = () *inside it, all should be commented out\
+* no need to comment out any urls to disable access from web browser\
+\
+\
+\
+\
+\
+\pard\pardeftab720
+
+\f0 \cf0 \expnd0\expndtw0\kerning0
+\CocoaLigature1 install DB server
+\f2 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/\
+\
+1) 
+\f3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10\
+
+\f2 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+2) 
+\f3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list\
+
+\f2 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+3) 
+\f3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 sudo apt-get update\
+
+\f2 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+4) 
+\f3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 sudo apt-get install -y mongodb-org\
+
+\f2 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+5) 
+\f3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 sudo apt-get install -y mongodb-org=3.0.3 mongodb-org-server=3.0.3 mongodb-org-shell=3.0.3 mongodb-org-mongos=3.0.3 mongodb-org-tools=3.0.3 \'97force-yes\
+\
+6) echo "mongodb-org hold" | sudo dpkg --set-selections\
+\pard\pardeftab720
+\cf0 \expnd0\expndtw0\kerning0
+   echo "mongodb-org-server hold" | sudo dpkg --set-selections\
+   echo "mongodb-org-shell hold" | sudo dpkg --set-selections\
+   echo "mongodb-org-mongos hold" | sudo dpkg --set-selections\
+   echo "mongodb-org-tools hold" | sudo dpkg --set-selections\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 \CocoaLigature0 *bind to new IP address and open port for mongodb\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf3 \cb0 vim /etc/mongodb.conf \
+bind_ip = 10.114.239.117\
+port = 27017\cf0 \cb1 \
+\
+\
+apt-get install numactl\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f4 \cf0 master and slave setup\
+http://docs.mongodb.org/manual/core/master-slave/\
+\
+for master\
+numactl --interleave=all mongod --master --dbpath /var/lib/mongodb/\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f2 \cf0 for slave\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f4 \cf0 numactl --interleave=all mongod --slave --source 
+\f0 \expnd0\expndtw0\kerning0
+\CocoaLigature1 10.114.239.69:27017
+\f4 \kerning1\expnd0\expndtw0 \CocoaLigature0  --dbpath /var/lib/mongodb/\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f2 \cf0 * this will create sources collection in local database holding info about the master\
+\
+\
+\pard\pardeftab720
+
+\f0 \cf0 \expnd0\expndtw0\kerning0
+\CocoaLigature1 install Cache
+\f2 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf3 \cb0 apt-get install redis-server\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \cb1 \
+*bind to new IP address of the cache server\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf3 \cb0 vi /etc/redis/redis.conf\
+bind 10.114.239.117\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \cb1 \
+*start redis\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf3 \cb0 service redis-server start\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \cb1 *check redis running\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf3 \cb0 tail -f /var/log/redis/redis-server.log\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \cb1 \
+\
+after moving codes there, \
+inside directory\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf3 \cb0 /var/www/voltage-ent.com/witches-server/Voltage\cf0 \cb1 \
+type python -m compileall .  to compile\
+after successfully compiled, \
+change owner to www-data (apache)  chown www-data:www-data \{new file name\}\
+restart apache\
+service apache2 restart\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f0 \cf0 \CocoaLigature1 \
+\
+}

@@ -1,0 +1,23 @@
+{% extends 'admintool/adm_base.html' %}
+{% load staticfiles %}
+
+{% block admin_content %}
+
+        <div class="message">
+            <h2>{{ message }}</h2>
+        </div>
+
+        <form id="upload_json_form" name="upload_json_form" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <label><h2 align="center">Update Client JSON</h2></label>
+            <br/>
+            <br/>
+            <input type="file" name="json_file">
+            <br>
+            <br>
+            <input type="submit" name="upload" value="upload">
+        </form>
+        
+        {% include "admintool/adm_env_select_form.html" with submit_form='upload_json_form' %}
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww13060\viewh9000\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 From Client Computer\
+1. run SendRootScript.sh with target IP address\
+\
+SSH in as root\
+2. run RootInitSetup.sh\
+3. create user \'93sysdev\'94\
+ \
+From Client Computer\
+4. run SSH_KEYREGIST.sh with user@host\
+5. run SendServerDeployScripts.sh with the target IP address\
+\
+SSH in as sysdev\
+6. cd in ~/ServerDeploy\
+7. run sudo ./ServerDeploy.sh\
+8. go to Jenkins, attach devBuild.sh also need syncExclusions and build*\
+need to set variable SERVER = IP address, ENVIRONMENT= dev, staging, or production, APACHEGROUP= apache or www-data\
+* it will pull git repo, rsync it to the server, change ownership and let the server deploy \
+9. run CopyDatabase with from IP address and to IP address \
+\
+}

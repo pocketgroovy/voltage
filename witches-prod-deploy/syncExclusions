@@ -1,0 +1,8 @@
+*.pyc
+*.log
+log/
+/.git/
+/.gitignore
+/Voltage/media
+/Voltage/templates/
+/Voltage/witches/assets

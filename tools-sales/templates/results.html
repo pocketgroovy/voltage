@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <script>
+      $(function() {
+        $("#datepicker").datepicker();
+        $("#datepicker1").datepicker();
+      });
+    </script>
+    {% if user.is_authenticated %}
+        <div class="container">
+            <div class="wrapper"><!-- wrapper needed for scroll -->
+                <!-- Top Navigation -->
+                <header class="codrops-header">
+                    <h1>Voltage Entertainment USA<span>Results</span></h1>
+                    {% if state %}
+                        <h2>{{ state }}</h2>
+                    {% endif %}
+                </header>
+                <div class="main clearfix">
+                    <p><button id="showMenu">Menu</button></p>
+                    <br>
+                    <div class="column">
+                        <label><h2 align="center">Select a Title and the range of dates and data to display:</h2></label>
+                        <br/>
+                        <br/>
+                        <form name="loadmaster" action="/sales/results/" method="post">
+                            {% csrf_token %}
+                            <select name="resultsType">
+                                {% if resultsType == 9 %}
+                                    <option value="9" selected="selected">ALL</option>
+                                <option value="0">Apple</option>
+                                <option value="1">Google</option>
+                                {% elif resultsType == 0 %}
+                                    <option value="9">ALL</option>
+                                    <option value="0" selected="selected">Apple</option>
+                                    <option value="1">Google</option>
+                                {% elif resultsType == 1 %}
+                                    <option value="9">ALL</option>
+                                    <option value="0">Apple</option>
+                                    <option value="1" selected="selected">Google</option>
+                                {% endif %}
+                            </select>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <select name="sel_currency">
+                                <option value="">Currency</option>
+                                {% for currency in currencies %}
+                                    {% if currency == sel_currency%}
+                                        <option value="{{ currency }}" selected="selected">{{ currency }}</option>
+                                    {% else %}
+                                        <option value="{{ currency }}">{{ currency }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {% if tableType == 'total' %}
+                                <input type="radio" name="tableType" value="total" checked="checked">Totals (Units)
+                                &nbsp;&nbsp;
+                                <input type="radio" name="tableType" value="breakdown">Breakdown
+                            {% elif tableType == 'breakdown' %}
+                                <input type="radio" name="tableType" value="total">Totals (Units)
+                                &nbsp;&nbsp;
+                                <input type="radio" name="tableType" value="breakdown" checked="checked">Breakdown
+                            {% endif %}
+                            <br/>
+                            <br/>
+                            <select name="sel_apple_title">
+                                <option value="">Apple</option>
+                                {% for title in apple_titles %}
+                                    {% if title.title == sel_apple_title %}
+                                        <option value="{{ title.title }}" selected="selected">{{ title.title }}</option>
+                                    {% else %}
+                                        <option value="{{ title.title }}">{{ title.title }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            &nbsp;&nbsp;&nbsp;
+                            <select name="sel_google_title">
+                                <option value="">Google</option>
+                                {% for title in google_titles %}
+                                    {% if title.productID == sel_google_title %}
+                                        <option value="{{ title.productID }}" selected="selected">{{ title.productID }}</option>
+                                    {% else %}
+                                        <option value="{{ title.productID }}">{{ title.productID }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            <br/>
+                            <br/>
+                            <label>Start Date:</label>
+                            <input name="startDate" type="text" id="datepicker" class="input" value="{{ startDate  }}"/>
+                            &nbsp;&nbsp;&nbsp;
+                            <label>End Date:</label>
+                            <input name="endDate" type="text" id="datepicker1" class="input" value="{{ endDate  }}"/>
+                            <br>
+                            <br>
+                            <input type="submit" name="show" value="SHOW">
+                        </form>
+                    </div>
+                    <div class="related">
+                        {% if total_results %}
+                            <label><h3>Installs : {{ installs }}
+                            &nbsp;&nbsp;&nbsp;
+                            Updates: {{ updates }}</h3></label>
+                            <label><h3>Total apple : {{ total_apple }}
+                            &nbsp;&nbsp;&nbsp;
+                            Total google : {{ total_google }}
+                            </h3></label>
+                            {% if tableType == 'total' %}
+                                {% if resultsType == 0 or resultsType == 9%}
+                                    <label><h2 align="center">Apple Results:</h2></label>
+                                {% elif resultsType == 1 %}
+                                    <label><h2 align="center">Google Results:</h2></label>
+                                {% endif %}
+                                    <table border="1" align="center" width="60%">
+                                        <thead>
+                                            <th>Currency</th>
+                                            <th>Price (tiers)</th>
+                                            <th>Units</th>
+                                        </thead>
+                                        {% for row in total_results %}
+                                            <tr>
+                                                <td>{{ row.currency }}</td>
+                                                <td>{{ row.customerPrice }}</td>
+                                                <td align="right">{{ row.units }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                {% if resultsType == 9 %}
+                                    <label><h2 align="center">Google Results:</h2></label>
+                                    <table border="1" align="center" width="60%">
+                                        <thead>
+                                            <th>Price (tiers)</th>
+                                            <th>Units</th>
+                                        </thead>
+                                        {% for row in total_results_google %}
+                                            <tr>
+                                                <td>{{ row.customerPrice }}</td>
+                                                <td align="right">{{ row.units }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                {% endif %} <!-- / resultsType -->
+                            {% elif tableType == 'breakdown' %}
+                                {% if resultsType == 0 or resultsType == 9%}
+                                    <label><h2 align="center">Apple Results:</h2></label>
+                                {% elif resultsType == 1 %}
+                                    <label><h2 align="center">Google Results:</h2></label>
+                                {% endif %}
+                                    <table border="1" align="center" width="60%">
+                                        <thead>
+                                            <th>SKU</th>
+                                            <th>Title</th>
+                                            <th>Units</th>
+                                        </thead>
+                                        {% for row in total_results %}
+                                            <tr>
+                                                <td align="left">{{ row.sku }}</td>
+                                                <td align="left">{{ row.title }}</td>
+                                                <td align="right">{{ row.units }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                    <br/>
+                                    <br/>
+                                {% if resultsType == 9 %}
+                                    <label><h2 align="center">Google Results:</h2></label>
+                                    <table border="1" align="center" width="60%">
+                                        <thead>
+                                            <th>Title</th>
+                                            <th>Units</th>
+                                        </thead>
+                                        {% for row in total_results_google %}
+                                            <tr>
+                                                <td align="left">{{ row.title }}</td>
+                                                <td align="right">{{ row.units }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                {% endif %} <!-- / resultsType -->
+
+                            {% endif %} <!-- / tableType -->
+                        {% endif %} <!-- / googlelist applelist -->
+                    </div>
+                </div><!-- /main -->
+            </div><!-- wrapper -->
+        </div><!-- /container -->
+    {% else %}
+        <meta http-equiv="refresh" content="0; url=/sales/home/" />
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,118 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1343\cocoasubrtf160
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;\f2\fnil\fcharset0 Calibri;
+}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10980\viewh25480\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 engneerserver-voltage-ent\
+\
+SSH USERS\
+root\
+p/w USvoltage135\
+\
+sysdev\
+p/w usvoltage\
+\
+dev01\
+p/w v06t@gE1\
+\
+SVN REPOs on server\
+/var/www/svn/\
+\
+To create repo\
+svnadmin create 
+\i repo-name\
+\
+\
+
+\i0 add Users and permissions\
+*must be root\
+1. useradd -g subversion 
+\i username   //this will add into the group and user name\
+
+\i0 2. passwd
+\i  username
+\i0 \
+3. inside /var/svn/   check all the  config files   ex/ * = r read only
+\i \
+
+\i0 \
+\
+\
+To lock file\
+\
+svn lock \{nameOffile\}\
+\
+for example if you want to lock all HierarchyPane smartObjects in the Unity \
+\
+CD to /trunk/MagdaBot/code/MagdaBot_Unity/MagdaBot/Assets/iGUI/Resources/SmartObjects/\
+then\
+svn lock HierarchyPane*\
+\
+\
+To check out "games" repo locally\
+svn co svn+ssh://sysdev@172.16.100.201/var/www/svn/games/\
+\
+To check out "tools" repo locally\
+svn co svn+ssh://sysdev@172.16.100.201/var/www/svn/tools/\
+\
+To switch SSH user from sysdev to yoshi\
+svn switch --relocate svn+ssh://sysdev@172.16.100.201/var/www/svn/games svn+ssh://yoshi@\
+/var/www/svn/games\
+\
+To commit\
+\
+go to the working copy or add a file to commit and \
+svn commit\
+\
+then write comments\
+\
+*\
+---comment when you commit\
+		//Trunk/SpyZ\
+		\{environment)/\{Project Name\}\
+\
+\
+enter to write and enter to get out\
+prompted for password\
+\
+*always svn up to update the repo on local before start editing and commit\
+*also svn up after committed\
+*make sure only commit Assets\
+\
+//to add comment\
+export SVN_EDITOR=nano\
+before commit\
+\
+//or in .bash_profile\
+SVN_EDITOR=nano\
+export SVN_EDITOR\
+\
+username yoshi\
+pw: embarcadero1!\
+\
+Webapp\
+http://172.16.100.201/svn/tools/trunk/\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\b \cf0 unadd -revert\
+\pard\pardeftab720
+
+\f1\b0 \cf0 svn revert --recursive folder_name\
+\
+To Export SVN REPO * copying is make the copy also as a working copy\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f0 \cf0 svn export --force --depth infinity . /Users/steve.sedlmayr/Desktop/SVN\\ Back-ups/games-backup-04112014_706PM/\
+\
+\
+To print log from SVN\
+\
+svn log -v -r \{2014-05-05\}:\{2014-05-06\} > log.txt\
+  -r \{previous date\}:\{current date\}\
+\
+\pard\pardeftab720
+
+\f2\fs30 \cf0 Then you take out the first entry, as that is from the previous day.}

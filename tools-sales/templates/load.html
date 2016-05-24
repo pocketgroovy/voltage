@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+        {% if user.is_authenticated %}
+			<div class="container">
+				<div class="wrapper"><!-- wrapper needed for scroll -->
+					<!-- Top Navigation -->
+					<header class="codrops-header">
+						<h1>Voltage Entertainment USA<span>Uploads</span></h1>
+                        {% if state %}
+                            <h2>{{ state }}</h2>
+                        {% endif %}
+					</header>
+					<div class="main clearfix">
+						<p><button id="showMenu">Menu</button></p>
+                        <br>
+						<div class="column">
+                            <form name="loadmaster" enctype="multipart/form-data" method="post">
+                                {% csrf_token %}
+                                <label><h2 align="center">Upload Zipped File:</h2></label>
+                                <br/>
+                                <br/>
+                                <input type="radio" name="fileType" value="0" checked>Apple&nbsp;&nbsp;
+                                <input type="radio" name="fileType" value="1">Google
+                                &nbsp;&nbsp;
+                                <input type="file" name="datafile">
+                                <br>
+                                <br>
+                                <input type="submit" name="LOAD" value="load">
+                            </form>
+						</div>
+						<div class="related">
+						</div>
+					</div><!-- /main -->
+				</div><!-- wrapper -->
+			</div><!-- /container -->
+        {% else %}
+            <meta http-equiv="refresh" content="0; url=/sales/home/" />
+        {% endif %}
+{% endblock %}

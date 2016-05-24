@@ -1,0 +1,167 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;\f2\fnil\fcharset128 HiraKakuProN-W3;
+\f3\froman\fcharset0 Times-Roman;\f4\fmodern\fcharset0 Courier-Bold;\f5\fnil\fcharset0 LucidaGrande;
+}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww13080\viewh19640\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 Check repository\
+\pard\pardeftab720
+
+\f1 \cf0 yum repolist\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0 \cf0 \
+\
+phpMyAdmin\
+\
+\'95yum php/mysql\
+\'95yum php\
+\'95copy config file inside var/www\
+config.sample.inc.php => config.inc.php\
+\
+Inside the config.inc.php\
+ 12 \
+ 13 /*\
+ 14  * This is needed for cookie based authentication to encrypt password in\
+ 15  * cookie\
+ 16  */\
+ 17 $cfg['blowfish_secret'] = 'a8b7c6d'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */\
+ 18 \
+ 19 /*\
+ 20  * Servers configuration\
+ 21  */\
+ 22 $i = 0;\
+ 23 \
+ 24 /*\
+ 25  * First server\
+ 26  */\
+ 27 $i++;\
+ 28 /* Authentication type */\
+ 29 $cfg['Servers'][$i]['auth_type'] = 'cookie';\
+ 30 /* Server parameters */\
+ 31 $cfg['Servers'][$i]['host'] = '127.0.0.1';\
+ 32 $cfg['Servers'][$i]['connect_type'] = 'tcp';\
+ 33 $cfg['Servers'][$i]['compress'] = false;\
+ 34 /* Select mysql if your server does not have mysqli */\
+ 35 $cfg['Servers'][$i]['extension'] = 'mysql';\
+ 36 $cfg['Servers'][$i]['AllowNoPassword'] = false;\
+ 37 $cfg['Servers'][$i]['port'] = '3307';\
+ 38 \
+ 39 /*\
+ 40  * phpMyAdmin configuration storage settings.\
+ 41  */\
+ 42 \
+ 43 /* User used to manipulate with storage */\
+ 44 // $cfg['Servers'][$i]['controlhost'] = '';\
+ 45 $cfg['Servers'][$i]['controlport'] = '';\
+ 46 $cfg['Servers'][$i]['controluser'] = '';\
+ 47 $cfg['Servers'][$i]['controlpass'] = '';\
+ 48 \
+ 49 /* Storage database and tables */\
+ 50 // $cfg['Servers'][$i]['pmadb'] = 'phpmyadmin';\
+ 51 // $cfg['Servers'][$i]['bookmarktable'] = 'pma__bookmark';\
+ 52 // $cfg['Servers'][$i]['relation'] = 'pma__relation';\
+ 53 // $cfg['Servers'][$i]['table_info'] = 'pma__table_info';\
+ 54 // $cfg['Servers'][$i]['table_coords'] = 'pma__table_coords';\
+ 55 // $cfg['Servers'][$i]['pdf_pages'] = 'pma__pdf_pages';\
+ 56 // $cfg['Servers'][$i]['column_info'] = 'pma__column_info';\
+ 57 // $cfg['Servers'][$i]['history'] = 'pma__history';\
+ 58 // $cfg['Servers'][$i]['table_uiprefs'] = 'pma__table_uiprefs';\
+ 59 // $cfg['Servers'][$i]['tracking'] = 'pma__tracking';\
+ 60 // $cfg['Servers'][$i]['designer_coords'] = 'pma__designer_coords';\
+ 61 // $cfg['Servers'][$i]['userconfig'] = 'pma__userconfig';\
+ 62 // $cfg['Servers'][$i]['recent'] = 'pma__recent';\
+ 63  $cfg['Servers'][$i]['users'] = 'yoshi';\
+ 64 // $cfg['Servers'][$i]['usergroups'] = 'pma__usergroups';\
+ 65 // $cfg['Servers'][$i]['navigationhiding'] = 'pma__navigationhiding';\
+ 66 $cfg['Servers'][$i]['socket'] = '/var/lib/mysql/3307/mysql.sock';\
+ 67 /* Contrib / Swekey authentication */\
+ 68 // $cfg['Servers'][$i]['auth_swekey_config'] = '/etc/swekey-pma.conf';\
+ 69 $cfg['Servers'][$i]['hide_db'] = '(information_schema|mysql|performance_schema)';\
+ 70 \
+                                                                                           \
+\
+\
+ps aux |
+\f2  grep yum   = to find process related to yum
+\f0 \
+\
+kill -SIGKILL  \{process number\} <= force quit\
+\
+\
+To Install mySQL with yum\
+\
+make sure you add this...\
+\
+\pard\pardeftab720
+
+\f3 \cf0 /etc/resolv.conf: \
+\
+nameserver 8.8.8.8\
+\
+Install mysql 5.5\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0 \cf0 \
+\
+\
+To enter mysql1\
+\
+mysql -u root -p --socket=/var/lib/mysql/multi1/mysql.sock\
+\
+password: USvoltage135\
+\
+\
+To import dumped database file  *import to mysql2\
+\
+mysql -u root -p --socket=/var/lib/mysql/multi2/mysql.sock \{database_name\} < \{database_name.sql\}\
+\
+
+\f2 \'8c\'bb\'8f\'f3\'8a\'6d\'94\'46
+\f0 \
+\pard\pardeftab720
+
+\f1 \cf0 # 
+\f4\b mysqld_multi report
+\f1\b0 \
+Reporting MySQL servers\
+MySQL server from group: mysqld1 is running\
+MySQL server from group: mysqld2 is running\
+\
+\pard\pardeftab720
+
+\f5 \cf0 \uc0\u9675 
+\f2 \'92\'e2\'8e\'7e
+\f1 \
+# 
+\f4\b mysqld_multi stop 
+\f1\b0 \
+\
+
+\f5 \uc0\u9675 
+\f2 \'92\'e2\'8e\'7e\'8c\'e3\'8a\'6d\'94\'46
+\f1 \
+# 
+\f4\b mysqld_multi report
+\f1\b0 \
+Reporting MySQL servers\
+MySQL server from group: mysqld1 is not running\
+MySQL server from group: mysqld2 is not running\
+\
+\
+when MYSQL won't stop\
+mysqladmin --socket=/var/lib/mysql/multi1/mysql.sock -P3306 -uroot -p shutdown\
+\
+\
+To create socket if needed(usually not)\
+\
+touch /var/lib/mysql/multi3/mysql.sock\
+\
+To add password\
+/usr/bin/mysqladmin -u root --socket=/var/lib/mysql/3308/mysql.sock password USvoltage135\
+\
+To start DB\
+mysql -u root -p -S /var/lib/mysql/3307/mysql.sock\
+}

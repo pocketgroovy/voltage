@@ -1,0 +1,9 @@
+.DS_Store
+.git
+SendServerDeployScripts.sh
+syncExclusions
+SSH_KEYREGIST.sh
+rootScripts
+RootInitSetup.sh
+SendRootScripts.sh
+

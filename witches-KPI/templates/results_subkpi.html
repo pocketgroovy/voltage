@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <script>
+      $(function() {
+        $("#picker").datepicker();
+        $("#picker1").datepicker();
+      });
+    </script>
+
+    <div class="container">
+        <div class="wrapper"><!-- wrapper needed for scroll -->
+            <!-- Top Navigation -->
+            <header class="codrops-header">
+                <h1>Voltage Entertainment USA<span>S U B - K P I</span></h1>
+                {% if state %}
+                    <h2 style="color:#FF8080">{{ state }}</h2>
+                {% endif %}
+            </header>
+            <div class="main clearfix">
+                <p><button id="showMenu">Menu</button></p>
+                <br>
+                <div class="column">
+                    <label><h2 align="center">Select the range of dates and data to display:</h2></label>
+                    <br/>
+                    <br/>
+                    <div align="left">
+                        <form name="loadmaster" action="/witcheskpi/subkpi/" method="post">
+                            {% csrf_token %}
+                            {% if daily == 1 %}
+                                <input type="checkbox" name="daily" value="1" checked="checked"/>&nbsp;<strong>Daily Info.</strong>
+                            {% else %}
+                                <input type="checkbox" name="daily" value="1"/>&nbsp;<strong>Daily Info.</strong>
+                            {% endif %}
+                            <br/>
+                            <br/>
+                            <select name="resultType">
+                                {% if resultsType == 0 %}
+                                    <option value="0" selected="selected">ALL</option>
+                                    <option value="1">Apple</option>
+                                    <option value="2">Google</option>
+                                {% elif resultsType == 1 %}
+                                    <option value="0">ALL</option>
+                                    <option value="1" selected="selected">Apple</option>
+                                    <option value="2">Google</option>
+                                {% elif resultsType == 2 %}
+                                    <option value="0">ALL</option>
+                                    <option value="1">Apple</option>
+                                    <option value="2" selected="selected">Google</option>
+                                {% endif %}
+                            </select>
+                            &nbsp;&nbsp;&nbsp;
+                            <label>Start Date :</label>
+                            <input name="startDate" type="text" id="picker" class="input" value="{{ startDate  }}"/>
+                            &nbsp;&nbsp;&nbsp;
+                            <label>End Date :</label>
+                            <input name="endDate" type="text" id="picker1" class="input" value="{{ endDate  }}"/>
+                            &nbsp;&nbsp;&nbsp;
+                            <br>
+                            <br>
+                            <div align="center">
+                                <input type="submit" name="show" value="SHOW">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="related">
+                    {% if resultsType == 1 and daily == 0 %}
+                        <label><h2 align="center">Apple Results:</h2></label>
+                        <br/>
+                        <table border="1" cellspacing="1" cellpadding="1" width="80%">
+                                <tr>
+                                    <td align="left"><strong>Installs</strong></td>
+                                    <td align="right">{{ response_apple.installs }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>1st Openings</strong></td>
+                                    <td align="right">{{ response_apple.fist_openings }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>1st Purchases</strong></td>
+                                    <td align="right">{{ response_apple.first_purchases }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>1st Purchase Rate</strong></td>
+                                    <td align="right">{{ response_apple.first_purchase_rate }}%</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>1st Month Total Sales</strong></td>
+                                    <td align="right">{{ response_apple.first_month_total_sales }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>1st Month ARPU</strong></td>
+                                    <td align="right">{{ response_apple.first_month_arpu }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>Drop off</strong></td>
+                                    <td align="right">{{ response_apple.drop_off }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>Devices</strong></td>
+                                    <td>
+                                        <table border="1" width="100%">
+                                            <thead>
+                                                <th>Name</th>
+                                                <th>Number</th>
+                                            </thead>
+                                            {% for device in response_apple.devices %}
+                                                <tr>
+                                                <td align="left">{{ device.device_name }}</td>
+                                                <td align="right">{{ device.count }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>Character Sales</strong></td>
+                                    <td>
+                                        <table border="1" width="100%">
+                                            <thead>
+                                                <th>Character</th>
+                                                <th>Sales</th>
+                                            </thead>
+                                            {% for character in response_apple.character_sales %}
+                                                <tr>
+                                                <td align="left">{{ character.characterid }}</td>
+                                                <td align="right">{{ character.sales }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </td>
+                                </tr>
+                        </table>
+                        <br/>
+                    {% elif resultsType == 1 and daily == 1 %}
+                        {% for daily_results in weekly_results %}
+                            <table border="1" width="70%">
+                                <thead>
+                                    <th>Date</th>
+                                    {% for day in daily_results %}
+                                            <th {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.date }}</th>
+                                    {% endfor %}
+                                </thead>
+                                <tr>
+                                    <td align="left"><strong>Installs</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.installs }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>1st Openings</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.first_openings }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>1st Purchases</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.first_purchases }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>1st Purchase Rate</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.first_purchase_rate }}%</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>1st Month Total Sales</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.first_month_total_sales }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>1st Month ARPU</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.first_month_arpu }}%</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>Drop off</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>{{ day.drop_off }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>Devices</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>
+                                                {% if day.devices %}
+                                                    <table class="gridtable">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Number</th>
+                                                        </thead>
+                                                        {% for device in day.devices %}
+                                                            <tr>
+                                                            <td align="left">{{ device.device_name }}</td>
+                                                            <td align="right">{{ device.count }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </table>
+                                                {% endif %}
+                                            </td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td align="left"><strong>Character Sales</strong></td>
+                                    {% for day in daily_results %}
+                                            <td align="right" {% if day.weekend %}style="background-color:#99D6AD"{% endif %}>
+                                                {% if day.character_sales %}
+                                                    <table class="gridtable">
+                                                        <thead>
+                                                            <th>Character</th>
+                                                            <th>Sales</th>
+                                                        </thead>
+                                                        {% for character in day.character_sales %}
+                                                            <tr>
+                                                            <td align="left">{{ character.characterid }}</td>
+                                                            <td align="right">{{ character.sales }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </table>
+                                                {% endif %}
+                                            </td>
+                                    {% endfor %}
+                                </tr>
+                            </table>
+                            <br/>
+                        {% endfor %}
+
+                    {% elif resultsType == 2 %}
+                        <label><h2 align="center">Google Results:</h2></label>
+                        <br/>
+                        <table>
+                            {% for row in googlelist %}
+                                <tr>
+                                    <td>{{ row.productTitle }}</td>
+                                    <td>{{ row.itemPrice }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% elif resultsType == 0 %}
+                        <label><h2 align="center">Apple Results:</h2></label>
+                        <br/>
+                        <table>
+                            {% for row in applelist %}
+                                <tr>
+                                    <td>{{ row.title }}</td>
+                                    <td>{{ row.units }}</td>
+                                    <td>{{ row.customerPrice }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                        <br/>
+                        <label><h2 align="center">Google Results:</h2></label>
+                        <br/>
+                        <table>
+                            {% for row in googlelist %}
+                                <tr>
+                                    <td>{{ row.productTitle }}</td>
+                                    <td>{{ row.itemPrice }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                </div>
+            </div><!-- /main -->
+        </div><!-- wrapper -->
+    </div><!-- /container -->
+
+{% endblock %}
