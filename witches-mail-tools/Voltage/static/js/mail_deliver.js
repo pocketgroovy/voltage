@@ -5,36 +5,7 @@
 
 window.onload = function () {
     document.getElementById('check_all_items').onclick = disableItems2and3;
-
-    document.getElementById('select_all_users').onchange = disableLists;
-}
-
-
-function disableLists() {
-    var x = document.getElementById("sel_users").disabled
-    if (x) {
-        document.getElementById("sel_users").disabled = false;
-
-    }
-    else {
-        document.getElementById("sel_users").disabled = true;
-    }
-    var phone_ids = document.getElementsByClassName("phone_id")
-        for (var i = 0; i < phone_ids.length; i++) {
-            if (phone_ids[i].disabled) {
-                phone_ids[i].disabled = false;
-            }
-            else{
-                phone_ids[i].disabled = true;
-                empty_phone_id_inputs(phone_ids[i])
-            }
-        }
-}
-
-function empty_phone_id_inputs(phone_id_input){
-    phone_id_input.value="";
-}
-
+};
 
 function disableItems2and3() {
     var is_all_item_checked = document.getElementById('check_all_items').checked;

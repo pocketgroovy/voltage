@@ -31,9 +31,9 @@ def get_user_id_from_phone_id(phone_id):
     if user_id and len(user_id) == 1:
         return user_id[0].id
     else:
-        error = get_properties(err_type="Error", err_code="ERR0042")
+        error = get_properties(err_type="Error", err_code="ERR0023")
         res_dict = {'status': 'failed', 'function': other, 'Error': error}
-        raise Exception(res_dict)
+        return res_dict
 
 
 def remove_extra_space(phone_id):

@@ -1,7 +1,9 @@
+import os
+import datetime
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from Voltage.witch_mail_config import get_environment
-from witches.admintool.adm_mail import send_item_to_user, send_all_items_to_user
+from witches.admintool.adm_mail import send_item_to_user, send_all_items_to_user, bulk_send_item_to_users
 from witches.admintool.adm_util import throw_error, get_properties, get_user_id_from_phone_id
 import logging
 from witches.models import WUsers, Ingredients, Potions, AvatarItems
@@ -12,12 +14,16 @@ logger = logging.getLogger(__name__)
 def home(request):
     context = RequestContext(request)
     ENVIRONMENT = get_environment('Env', 'environment')
+
     return render_to_response('admintool/adm_home.html', {'environment': ENVIRONMENT}, context_instance=context)
 
 
 def deliver_window(request):
     context = RequestContext(request)
     ENVIRONMENT = get_environment('Env', 'environment')
+
+    vpn_connection()
+
     users = WUsers.objects.filter(delete_flag=False)
     ingredients = Ingredients.objects.filter(delete_flag=False)
     potions = Potions.objects.filter(delete_flag=False)
@@ -25,6 +31,10 @@ def deliver_window(request):
     return render_to_response('admintool/adm_deliver.html',
                               {'users': users, 'ingredients_list': ingredients, 'potions_list': potions,
                                'avatar_items_list': avatar_items, 'environment': ENVIRONMENT}, context_instance=context)
+
+
+def vpn_connection():
+    os.system(os.path.join(os.path.dirname(__file__), "../../../call_softlayer.sh"))
 
 
 def is_selection_currency(item_dict):
@@ -76,8 +86,6 @@ def gather_selected_item_list(request):
 
 
 def get_user_ids(request):
-    all_users = request.POST.get('all_users')
-    sel_users = request.POST.getlist('sel_users')
     phone_id1 = request.POST.get('phone_id1')
     phone_id2 = request.POST.get('phone_id2')
     phone_id3 = request.POST.get('phone_id3')
@@ -85,15 +93,13 @@ def get_user_ids(request):
 
     platform = request.POST.get('platform')
 
-    if platform or all_users:
+    if platform:
         filterArgs = {'delete_flag': False}
         
         if platform and platform != 'All':
             filterArgs['device'] = platform
             
         user_ids = WUsers.objects.filter(**filterArgs).values_list('id', flat=True)
-    elif sel_users:
-        user_ids = sel_users
     else:
         user_ids = []
 
@@ -125,6 +131,8 @@ def is_any_selected(item_id_list, currencies):
 def deliver(request):
     context = RequestContext(request)
     other = 'deliver'
+    start = datetime.datetime.now()
+
     if request.POST:
         quantity1 = request.POST.get('quantity1')
         quantity2 = request.POST.get('quantity2')
@@ -155,30 +163,27 @@ def deliver(request):
             currency_dict = {}
 
         if len(user_ids) > 0:
-            for user_id in user_ids:
-                if not all_items:
-                    if is_any_selected(item_id_list, currency_dict):
-                        send_item_to_user(item_id_list, message, user_id, currency_dict, context, other)
-                    else:
-                        Error = get_properties(err_type='Error', err_code='ERR1001')
-                        res_dict = {'status': 'failed', 'function': other, 'Error': Error}
-                        return throw_error(template='admintool/adm_deliver.html', context=context, obj_dict=res_dict)
-                elif not item_type1:
-                    Error = get_properties(err_type='Error', err_code='ERR1002')
+            if not all_items:
+                if is_any_selected(item_id_list, currency_dict):
+                    bulk_send_item_to_users(item_id_list, message, user_ids, currency_dict, context, other)
+                else:
+                    Error = get_properties(err_type='Error', err_code='ERR1001')
                     res_dict = {'status': 'failed', 'function': other, 'Error': Error}
                     return throw_error(template='admintool/adm_deliver.html', context=context, obj_dict=res_dict)
-                else:
-                    send_all_items_to_user(message, user_id, item_type1, context, other)
-                    item_id_list = ['all ' + item_type1]
+            elif not item_type1:
+                Error = get_properties(err_type='Error', err_code='ERR1002')
+                res_dict = {'status': 'failed', 'function': other, 'Error': Error}
+                return throw_error(template='admintool/adm_deliver.html', context=context, obj_dict=res_dict)
 
             sent_items = {'item_list': item_id_list}
             if currency_dict != {}:
                 sent_items.update(currency_dict)
-
         else:
             Error = get_properties(err_type='Error', err_code='ERR1000')
             res_dict = {'status': 'failed', 'function': other, 'Error': Error}
             return throw_error(template='admintool/adm_deliver.html', context=context, obj_dict=res_dict)
 
+        end = datetime.datetime.now()
+        print("time spent: " + str(end-start))
         return render_to_response('admintool/adm_deliver.html', {'recipients': user_ids, 'sent_item': sent_items},
                                   context_instance=context)

@@ -236,7 +236,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(os.path.dirname(__file__), '../log/witches.log'),
+            'filename': os.path.join(os.path.dirname(__file__), '../../log/witches.log'),
             'formatter': 'verbose'
         },
     },

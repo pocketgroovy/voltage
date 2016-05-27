@@ -116,7 +116,7 @@ a.back{
 }
 
 #results{
-    font-size: x-large;
+    font-size: small;
     color: #FFF111;
 }
 
@@ -143,10 +143,23 @@ input[type="text"]{ padding: 10px 10px; line-height: 10px; }
 
 #error_message{
     color: #FFF111;
+    font-size: small;
 }
 
 
 #deliver{
     width: 80px;
     height: 40px;
+}
+
+#warning{
+    color: #FFF111;
+}
+
+#instruction{
+    font-weight: bold;
+}
+
+#title{
+    font-style: italic;
 }

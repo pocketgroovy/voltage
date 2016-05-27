@@ -6,7 +6,14 @@ PREPROD_DB=10.91.91.254
 PROD_DB=10.114.239.105
 PROD1=10.114.239.77
 PROD2=10.114.239.121
-SERVER_REPO=172.16.100.204
+# temporary till SSH access is enabled
+if [ "${GIT_PASSWORD}" != "" ]; then
+    ROOT_REPO_PATH=https://${GIT_USER}:${GIT_PASSWORD}@github.com/VoltageEntertainment
+else
+    ROOT_REPO_PATH=https://${GIT_USER}@github.com/VoltageEntertainment
+fi
+
+SERVER_REPO=witches-server
 
 DEPLOY_PATH=/var/www/voltage-ent.com/witches-server
 
@@ -43,8 +50,8 @@ echo "Database Updated"
 ./updateAndroidEnvironments.sh ${PROD_DB}/witches ${from} ${to} ${future}
 
 # Copy over the new server code
-if [ ! -e witches-server ]; then
-    git clone git@${SERVER_REPO}:witches-server
+if [ ! -d ${SERVER_REPO} ]; then
+   git clone ${ROOT_REPO_PATH}/${SERVER_REPO}.git
 fi
 pushd witches-server
 git clean -d -f -q

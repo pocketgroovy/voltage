@@ -8,32 +8,32 @@
                 <label><h2 align="center">Deliver Items</h2></label>
             </tr>
             <br/>
+            <br/>
+            <label id="instruction">Select A Platform to Send Mail to All Users on the Platform</label>
+            <br/><br/>
             <tr>
-                <label>Select the user(s) to deliver to:</label><br/>
-                <select multiple="multiple" name="sel_users" id="sel_users" size=10>
-                    {% for user in users %}
-                        <option value="{{ user.id }}">
-                            [{{ user.id }}]&nbsp;{{ user.last_name }}, {{ user.first_name }}</option>
-                    {% endfor %}
-                </select>
-                <input id="select_all_users" type="checkbox" value="all_users" name="all_users">Select All Users</input>
+                <label id="title">By Platform:</label>
             </tr>
-	    <br/>
-	    <br/>
-	    <tr>
-	      <label>By Platform:</label>
-	    </tr>
-	    <br/>
-	    <br/>
-	    <tr>
-	      <input type="radio" name="platform" value="All">All</input>
-	      <input type="radio" name="platform" value="Android">Android</input>
-	      <input type="radio" name="platform" value="IPhonePlayer">iOS</input>
-	    </tr>
             <br/>
-            <br/>
+
             <tr>
-                <label>Enter User ID(phone_id)</label>
+                <input type="radio" name="platform" value="All">All</input>
+                <input type="radio" name="platform" value="Android">Android</input>
+                <input type="radio" name="platform" value="IPhonePlayer">iOS</input>
+                <input type="radio" name="platform" value="Amazon">Amazon</input>
+            </tr>
+            <br/>
+            <br/>
+            <br/>
+            <label id="instruction">Type in phone id in the box below to send any other users regardless of platform
+            </label><br/>
+            <label id="warning">--WARNING--<br/>
+                These users are additional to the platform selected users. If the user is on the platform selected,
+                the user will get the same mail multiple times</label><br/><br/>
+
+            <tr>
+                <label id="title">Enter User ID(phone_id)</label><br/>
+
                 <input class="phone_id" id="phone_id1" type="text" name="phone_id1" value="{{ phone_id1 }}">&nbsp;
                 <input class="phone_id" id="phone_id2" type="text" name="phone_id2" value="{{ phone_id2 }}">&nbsp;
                 <input class="phone_id" id="phone_id3" type="text" name="phone_id3" value="{{ phone_id3 }}">&nbsp;
@@ -42,11 +42,10 @@
             <br/>
             <br/>
             <tr>
-                <label>Message : </label>
+                <label id="title">Message : </label><br/>
                 <input id="message" type="text" name="message" value="{{ message }}">
             </tr>
-            <br/>
-            <br/>
+            <br/><br/>
             <tr>
                 <input id="deliver" type="submit" name="deliver" value="deliver">
             </tr>
@@ -60,64 +59,70 @@
                     {% endif %}
                 {% endif %}
             </div>
-            <br/>
-            <tr id="first_item_selected">
             <tr>
-                <td>
-                    <select id="item_type" name="item_type1" onchange="selection_switch(this.value);">
-                        <option value="">-- Select a Category --</option>
-                        <option value="starstones">Starstones</option>
-                        <option value="coins">Coins</option>
-                        <option value="stamina_potions">Stamina Potions</option>
-                        <option value="avatar_items">AvatarItems</option>
-                        <option value="potions">Potions</option>
-                        <option value="ingredients">Ingredients</option>
-                    </select>
-                    <input id="check_all_items" type="checkbox" name="check_all_items" value="check_all_items">
-                    <label id="check_all_items_label">ALL ITEMS</label>
-                </td>
-            </tr>
-            <br>
-            <tr>
-                <td>
-                    <label id="quantity_label" class="quantity">Quantity:</label>
-                    <input type="text" name="quantity1" id="quantity" class="quantity" value="{{ quantity }}">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="item_selector"> Item 1
-                        <br/>
-                        <select name="sel_item_ids1[]" id="sel_ingredients">
-                            <option value="">-- Select an item --</option>
-                            {% for ingredients in ingredients_list %}
-                                <option value="{{ ingredients.id }}">
-                                    [{{ ingredients.id }}],&nbsp;{{ ingredients.name }} </option>
-                            {% endfor %}
-                        </select>
-                        <br/>
-                        <select name="sel_item_ids1[]" id="sel_potions">
-                            <option value="">-- Select an item --</option>
-                            {% for potions in potions_list %}
-                                <option value="{{ potions.id }}">
-                                    [{{ potions.id }}],&nbsp;{{ potions.name }} </option>
-                            {% endfor %}
-                        </select>
-                        <br/>
-                        <select name="sel_item_ids1[]" id="sel_avatarItems">
-                            <option value="">-- Select an item --</option>
-                            {% for avatar_item in avatar_items_list %}
-                                <option value="{{ avatar_item.id }}">
-                                    [{{ avatar_item.id }}],&nbsp;{{ avatar_item.name }} </option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <br/>
-                    <br/>
-                </td>
-            </tr>
+                <div id="results">
+                    {% for user in recipients %}
+                        {{ sent_item }} has been sent to {{ user }}
+                    {% endfor %}
+                </div>
             </tr>
             <br/>
+
+            <div id="first_item_selected">
+                <tr>
+                    <td>
+                        <select id="item_type" name="item_type1" onchange="selection_switch(this.value);">
+                            <option value="">-- Select a Category --</option>
+                            <option value="starstones">Starstones</option>
+                            <option value="coins">Coins</option>
+                            <option value="stamina_potions">Stamina Potions</option>
+                            <option value="avatar_items">AvatarItems</option>
+                            <option value="potions">Potions</option>
+                            <option value="ingredients">Ingredients</option>
+                        </select>
+                        <input id="check_all_items" type="checkbox" name="check_all_items" value="check_all_items">
+                        <label id="check_all_items_label">ALL ITEMS</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label id="quantity_label" class="quantity">Quantity:</label>
+                        <input type="text" name="quantity1" id="quantity" class="quantity" value="{{ quantity }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item_selector"> Item 1
+                            <br/>
+                            <select name="sel_item_ids1[]" id="sel_ingredients">
+                                <option value="">-- Select an item --</option>
+                                {% for ingredients in ingredients_list %}
+                                    <option value="{{ ingredients.id }}">
+                                        [{{ ingredients.id }}],&nbsp;{{ ingredients.name }} </option>
+                                {% endfor %}
+                            </select>
+                            <br/>
+                            <select name="sel_item_ids1[]" id="sel_potions">
+                                <option value="">-- Select an item --</option>
+                                {% for potions in potions_list %}
+                                    <option value="{{ potions.id }}">
+                                        [{{ potions.id }}],&nbsp;{{ potions.name }} </option>
+                                {% endfor %}
+                            </select>
+                            <br/>
+                            <select name="sel_item_ids1[]" id="sel_avatarItems">
+                                <option value="">-- Select an item --</option>
+                                {% for avatar_item in avatar_items_list %}
+                                    <option value="{{ avatar_item.id }}">
+                                        [{{ avatar_item.id }}],&nbsp;{{ avatar_item.name }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <br/>
+                        <br/>
+                    </td>
+                </tr>
+            </div>
 
             <div id="second_item_selected">
                 <tr>
@@ -133,14 +138,12 @@
                         </select>
                     </td>
                 </tr>
-                <br/>
                 <tr>
                     <td>
                         <label id="quantity_label2" class="quantity">Quantity:</label>
                         <input type="text" name="quantity2" id="quantity2" class="quantity" value="{{ quantity2 }}">
                     </td>
                 </tr>
-                <br/>
                 <tr>
                     <td>
                         <div class="item_selector"> Item 2
@@ -174,7 +177,7 @@
                     </td>
                 </tr>
             </div>
-            <br/>
+
             <tr id="third_item_selected">
             <tr>
                 <td>
@@ -189,7 +192,6 @@
                     </select>
                 </td>
             </tr>
-            <br/>
             <tr>
                 <td>
                     <label id="quantity_label3" class="quantity">Quantity:</label>
@@ -224,18 +226,7 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <br/>
-                    <br/>
                 </td>
-            </tr>
-            </tr>
-            <br/>
-            <tr>
-                <div id="results">
-                    {% for user in recipients %}
-                        {{ sent_item }} has been sent to {{ user }}
-                    {% endfor %}
-                </div>
             </tr>
         </form>
     </table>

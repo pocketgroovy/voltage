@@ -1,0 +1,99 @@
+Server Monitoring System
+Skip to end of metadata
+Created by Yoshi Miyamoto, last modified just a moment ago Go to start of metadata
+Console   http://curses.en.ent.voltest.com:3000/login
+Graphite/Grafana - on staging server creating graph based on the data sent by collectd.
+<reference>
+installation  -  https://anomaly.io/install-graphite-centos/
+Graphite Docs - http://graphite.wikidot.com/
+Grafana Docs - http://docs.grafana.org/guides/gettingstarted/
+ 
+<OUTLINE>
+Grafana is only responsible for showing graph according to the data you chose to get as datasource 
+Graphite is a set of monitoring tools composed of
+Carbon - listening incoming data through each port specified in the config file
+whisper - database found in /opt/graphite/storage/whisper/  storing data from each server's collectd service
+webapp - renders graphs but we are using Grafana instead
+ 
+<SETUP>
+Repo: server-utils
+Graphite/Grafana
+inside Monitoring directory, run SendMonitoringScripts.sh with ip address of the server, ssh in the server as sysdev, in Monitoring direcroty, 
+run MonitoringGraphInstall.sh
+if new service needs to be registered for firewall, use CustomService.sh with the following params
+name = whatever you want to name it for the service. no space   * this name will be needed for when set up for firewall
+port = port number for the service  * this will be used to open up for firewall
+short name = short name for the service
+description = description for the service
+
+If you have a problem with virtual host, the following needs to be checked
+in /etc/httpd/conf.d/graphite.conf, at the top of the file, type Listen *8888
+after set up is done,
+cd /opt/graphite and run the following 
+PYTHONPATH=/opt/graphite/webapp/ django-admin.py syncdb --settings=graphite.settings
+PYTHONPATH=/opt/graphite/webapp/ django-admin.py collectstatic --settings=graphite.settings
+ 
+Carbon - 
+inside /opt/graphite/conf/carbon.conf (centos), add new [cache:alphabet] for new collectd instance. need to have unique **port number
+ex./
+[cache:c]
+LINE_RECEIVER_PORT = 2203 **
+PICKLE_RECEIVER_PORT = 2204
+CACHE_QUERY_PORT = 7202
+LOG_LISTENER_CONN_SUCCESS = True
+start carbon /opt/graphite/bin/carbon-cache.py --instance=alphabet start
+
+## I believe all ports number should be unique but I haven't tested with the same number ##
+<port usage>(4/7/16)
+2103 = Prod1
+2203 = Master DB
+2303 = db1
+2403 = db2
+2503 = web1(virtual)
+2603 = web2(virtual)
+ 
+Collectd - installed on servers including web1, web2, cache, database master, database slave  (stage and tanuki for testing)
+<collectd installation>
+repo server-utils
+run DeployCollectD.sh with server ip server name which will be shown in the Graphite tree and **port number specified in carbon to start the installation
+ex/ ./DeployCollectD.sh 10.111.111.111 curses_master_db 2203
+
+"systemctl enable collectd" to start on boot
+
+
+
+Set Retention Rate
+Each CollectD config should have smaller interval than graphite retention rate
+in /opt/collectd/etc/collectd.conf,  change Interval   
+at Tanuki, /opt/graphite/conf, inside storage-schemas.conf
+ex/ 1sec for 30 days
+[default_1sec_for_30day] # Doc purpose only, name can be anything.(show up in creates.log)
+pattern = .*  # regex to match collectoin name
+retentions = 1s:30d
+change storage-scheme won't be affected until you run  whisper-resize.py or remove the database.
+ex./  
+find /opt/graphite/storage/whisper -type f -name "*.wsp" | xargs -I{} whisper-resize.py {} 1s:30d    *this could take a while
+Delete Data
+at Tanuki, /opt/graphite/storage/whisper/  you find carbon and collectd directory, under the each directory, each instance of server data can be found. removing any from there, it will remove from graph.
+ 
+<ISSUE>
+/opt/collectd/etc/collectd.conf (centos) /etc/collectd/collectd.conf(ubuntu) has ip address for Tanuki, which could be changed after VPN disconnection and reconnected.
+to prevent this, database for Graphite where Collectd is sending data to, needs to be moved to each server. 
+Once Graphite connects to the servers, grab the database and create graph based on the data
+<reference>
+installation - https://www.digitalocean.com/community/tutorials/how-to-configure-collectd-to-gather-system-metrics-for-graphite-on-ubuntu-14-04
+CollectD Docs - https://collectd.org/
+ 
+ 
+Alternative
+SAR(system Activity Report)  installed on production servers
+http://www.thegeekstuff.com/2011/03/sar-examples/
+sar keeps everyday report in /var/log/sysstat with day of the month
+for example, if you want to see the CPU usage of 16th of this month,
+type sar -u -f /var/log/sysstat/sa16
+ 
+for memory,
+sar -u -f /var/log/sysstat/sa16
+ 
+for load average
+sar -q -f /var/log/sysstat/sa16

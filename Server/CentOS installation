@@ -1,0 +1,19 @@
+CentOS installation
+Skip to end of metadata
+Created by Yoshi Miyamoto, last modified just a moment ago Go to start of metadata
+Download an installer from software server 172.16.100.204 inside Linux folder
+Follow these steps to create bootable flash drive on mac first
+http://www.myiphoneadventure.com/os-x/create-a-bootable-centos-usb-drive-with-a-mac-os-x
+1 convert iso to img file
+ hdiutil convert -format UDRW -o target.img CentOS-7-x86_64-Minimal-1511.iso
+2. connect your flash drive to mac
+3. unmount the drive by finding out where it is mounted first
+diskutil list
+if the drive is shown as /dev/disk2
+diskutil unmountDisk /dev/disk2
+4. copy the img file to the drive  * this could take a while and no feedback are given during the process.
+time sudo dd if=target.img.dmg of=/dev/disk2 bs=1m
+5. Once it's done transferring. mac will ask you to eject the drive since it's no longer compatible with Mac format
+ 
+Start a machine from the bootable drive and follow the instruction on the screen
+https://www.howtoforge.com/centos-7-server

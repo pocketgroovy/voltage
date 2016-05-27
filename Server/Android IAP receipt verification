@@ -1,0 +1,8 @@
+Android IAP receipt verification
+Skip to end of metadata
+Created by Yoshi Miyamoto, last modified on May 23, 2016 Go to start of metadata
+user's receipt will be verified with android key which can be obtained from Google Developer Console, signature found in user receipt with PyCrypto 
+http://stackoverflow.com/questions/5440550/verifying-signature-on-android-in-app-purchase-message-in-python-on-google-app-e
+pycypto
+https://www.dlitz.net/software/pycrypto/api/current/
+Dev, Staging, Production use this. no separate verification method for each environment. 

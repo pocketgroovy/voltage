@@ -1,0 +1,35 @@
+Amazon IAP and receipt verification
+Skip to end of metadata
+Created by Yoshi Miyamoto, last modified on May 23, 2016 Go to start of metadata
+Amazon IAP testing
+install Amazon App Tester from Amazon Store and install onto Amazon device
+download amazon.sdktester.json from Amazon developer (https://developer.amazon.com/iap/M191WIWG7E1C0V/iap_list.html) on desktop
+push the json file to the device
+adb push [PATH_TO_Your_JSON_File_Folder]/amazon.sdktester.json /mnt/sdcard/
+more detail
+Receipt verification server. *these servers are hardcoded in the server code.
+SANDBOX 
+http://curses.en.ent.voltest.com:8080/RVSSandbox/version/1.0/verifyReceiptId/developer/ + "any string"
+PRODUCTION
+https://appstore-sdk.amazon.com/version/1.0/verifyReveiptId/developer/ + "AMAZON_DEVELOPER_SECRET"
+ 
+*troubleshooting
+if you get 404 on iAP purchase on sandbox testing, check the followings
+ make sure Tomcat is running webapp RVSSandbox by going http://curses.en.ent.voltest.com:8080/manager/html to see if started 
+ 
+
+
+ Amazon IAP Test
+Skip to end of metadata
+Created by Yoshi Miyamoto on Apr 21, 2016 Go to start of metadata
+There is some preparation needed for Amazon Sandbox IAP test
+install Amazon App Tester from Amazon Store
+Login to Amazon developer dashboard https://developer.amazon.com/home.html
+Click the app you are testing
+Click the tab "In-App Items"
+hit JSON Data File to download the in-app items in JSON format
+connect Amazon device and in terminal type in " adb push [your_JSON_file_Folder]/amazon.sdktester.json /mnt/sdcard/
+open Amazon App Tester and choose In-App Purchasing API
+select 5. IAP items in JSON File,  make sure you have all the items data there.
+select 2. API Response Settings, make sure all set to Default
+You can change User ID in 1.User Account Setting if needed

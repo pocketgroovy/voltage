@@ -1,4 +1,6 @@
+from django.db import transaction
 from witches.models import Characters, UserMailBox, AvatarItems, Potions, Ingredients
+from witches.utils.BulkCreateManager import BulkCreateManager
 
 __author__ = 'yoshi.miyamoto'
 
@@ -53,6 +55,49 @@ def send_item_to_user(item_id_list, message, user_id, currency_dict, context, ot
                                login_bonus_id='', stamina_potion_received_flag=False,
                                premium_received_flag=False, free_currency_received_flag=False,
                                multiply_bonus_flag=False, sender_type_for_metrics=sender_type_for_metrics)
+
+
+BULK_SIZE = 1000
+def bulk_send_item_to_users(item_id_list, message, user_id_list, currency_dict, context, other):
+    sender_flag = False
+    sender_type_for_metrics = get_sender_info_for_metrics(sender_flag)
+
+    system_id = get_system_id(context, other)
+    if len(item_id_list) > 0:
+        if len(item_id_list) > 4:
+            logger.debug('try to send less than or equal to 4 items at a time')
+
+    premium = None
+    free = None
+    stamina_potions = None
+
+    if len(currency_dict) > 0:
+        for currency_name in currency_dict:
+            if currency_name == "starstones":
+                premium = int(currency_dict[currency_name])
+                if premium < 0:
+                    premium = None
+            elif currency_name == "coins":
+                free = int(currency_dict[currency_name])
+                if free < 0:
+                    free = None
+            elif currency_name == "stamina_potions":
+                stamina_potions = int(currency_dict[currency_name])
+                if stamina_potions < 0:
+                    stamina_potions = None
+
+    instances = BulkCreateManager(UserMailBox, BULK_SIZE)
+
+    for user_id in user_id_list:
+        mail = UserMailBox(user_id=user_id, gifts=item_id_list, title="", sender_flag=sender_flag,
+                           message_body=message, sender_id=system_id, read_flag=False,
+                           premium_currency=premium, free_currency=free, stamina_potion=stamina_potions,
+                           login_bonus_id='', stamina_potion_received_flag=False, premium_received_flag=False,
+                           free_currency_received_flag=False, multiply_bonus_flag=False,
+                           sender_type_for_metrics=sender_type_for_metrics)
+        instances.append(mail)
+
+    instances.create()  # needs to create for reminder of n/BULK_SIZE
 
 
 def send_all_items_to_user(message, user_id, item_type1, context, other):
